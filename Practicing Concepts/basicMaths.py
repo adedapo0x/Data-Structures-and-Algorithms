@@ -7,3 +7,17 @@ def countNumber(num):
 
 # print(countNumber(1400)) # Test
 
+
+# function to reverse a given number
+def reverseNumber(num):
+    new_num = 0
+    while num > 0:
+        digit = num % 10
+        num = num // 10
+        new_num = (new_num * 10) + digit
+    return new_num
+
+# print(reverseNumber(145890900090)) # test
+
+
+
