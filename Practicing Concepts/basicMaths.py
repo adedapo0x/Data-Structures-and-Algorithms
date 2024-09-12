@@ -19,5 +19,21 @@ def reverseNumber(num):
 
 # print(reverseNumber(145890900090)) # test
 
+# Find greatest common divisor
+def gcd(a, b):
+    # Euclidean formular for finding GCD/HCF
+    while a > 0 and b > 0:
+        if a > b: a = a % b
+        else: b = b % a
+    if a == 0: return b
+    return a
+
+# or another method, start looping from the smaller of the two number, 
+# first factor is the HCF
+def hcf(a,b):
+    for i in range(min(a,b), 0, -1):
+        if a % i == 0 and b % i == 0:
+            return i
+    return 1
 
 
