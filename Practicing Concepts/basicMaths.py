@@ -53,3 +53,17 @@ def isArmStrong(num):
 
 
 
+# function to get all divisors of a number
+# rather than looping and checking for divisors till we get to the number, 
+# take square root, find divisors up to square root, looped numbers and the scond number that divides it are divisors
+
+def getDivisors(num):
+    divisors = []
+    from math import sqrt
+    for i in range(1, int(sqrt(num))+1):
+        if num % i == 0:
+            divisors.append(i)
+            if num // i != i:
+                divisors.append(num // i)
+    return divisors
+
