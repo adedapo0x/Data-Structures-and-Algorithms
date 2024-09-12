@@ -37,3 +37,19 @@ def hcf(a,b):
     return 1
 
 
+# checks if a number is an armstrong number
+# an armstrong number is a number that is equal to the sum of its own digits 
+# each raised to the power of the number of digits.
+
+def isArmStrong(num):
+    copy = num
+    length = len(str(num))
+    result = 0
+    while copy > 0:
+        digit = copy % 10
+        result += digit ** length
+        copy = copy // 10
+    return result == num
+
+
+
