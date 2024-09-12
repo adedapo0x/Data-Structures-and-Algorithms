@@ -67,3 +67,16 @@ def getDivisors(num):
                 divisors.append(num // i)
     return divisors
 
+
+# determine if a number is prime by checking up to its square root,
+# rather than having to loop all the way to the number
+
+def isPrime(num):
+    if num < 2:
+        return False
+    from math import sqrt
+    sqrtNum = int(sqrt(num))
+    for i in range(2, sqrtNum + 1):
+        if num % i == 0:
+            return False
+    return True
