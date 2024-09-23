@@ -7,3 +7,4 @@ class Solution:
             else:
                 freqSet.add(x)
         return False
+    

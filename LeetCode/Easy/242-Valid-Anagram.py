@@ -13,3 +13,15 @@ class Solution:
                 checkDict[check] = 1
         if checkDict == hashDict: return True
         return False
+    
+
+        # another more optimized solution but also with hashmap
+        # sHash = {}
+        # for char in s:
+        #     sHash[char] = sHash.get(char, 0)+1
+        # for lett in t:
+        #     sHash[lett] = sHash.get(lett,5)-1
+        # for val in sHash.values():
+        #     if val != 0:
+        #         return False
+        # return True
