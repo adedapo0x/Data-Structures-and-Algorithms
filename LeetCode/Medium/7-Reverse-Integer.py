@@ -10,6 +10,7 @@ class Solution:
             if reverse > (2 ** 31) -1 or reverse < -(2 ** 31):
                 return 0
             return -reverse
+        
         else:
             reverse = int(strX[::-1])
             if reverse > (2 ** 31) -1 or reverse < -(2 ** 31):
