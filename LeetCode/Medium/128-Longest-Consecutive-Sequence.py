@@ -12,3 +12,18 @@ class Solution:
                     length += 1
                 longest = max(longest, length)
         return longest
+    
+
+        #another very similar way to the one above, did this in revision
+
+        # hashSet = set(nums)
+        # largest = 0
+        # for n in hashSet:
+        #     if (n - 1) in hashSet:
+        #         continue
+        #     count = 1
+        #     while (n + 1) in hashSet:
+        #         count += 1
+        #         n += 1
+        #     largest = max(count, largest)
+        # return largest
