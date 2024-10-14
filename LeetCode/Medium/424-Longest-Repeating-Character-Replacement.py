@@ -15,3 +15,21 @@ class Solution:
                 l += 1
             res = max(res, r - l + 1) # then check for max of all the windows we get for the answer
         return res
+    
+
+        # implemented without iteration done by count.values()
+
+        # l, r = 0, 0
+        # count = {}
+        # maxLength, maxCount = 0, 0
+        # while r < len(s) and l <= r:
+        #     count[s[r]] = 1 + count.get(s[r], 0)
+        #     maxCount = max(maxCount, count[s[r]])
+        #     if (r - l + 1) - maxCount > k:
+        #         count[s[l]] -= 1
+        #         l += 1
+        #     else:
+        #         maxLength = max(maxLength, (r - l + 1))
+        #     r += 1
+        # return maxLength
+
