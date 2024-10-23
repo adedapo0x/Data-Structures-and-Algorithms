@@ -1,6 +1,7 @@
 class Solution:
     def generateParenthesis(self, n: int):
-
+        # Note to self: Neetcode used a stack solution, this doesn't and is more simpler and straightforward
+        # major concept here is backtracking, which I am yet to get very familiar on
         res = []
 
         def backtrack(left, right, s):
