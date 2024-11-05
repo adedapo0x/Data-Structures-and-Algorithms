@@ -17,3 +17,5 @@ def selectionSort(arr):
             arr[i], arr[minIndex] = arr[minIndex], arr[i]
     return arr
 
+# Time Complexity: O(n^2)
+# Space Complexity: O(1)
