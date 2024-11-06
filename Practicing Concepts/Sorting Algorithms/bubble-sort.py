@@ -7,4 +7,14 @@
 
 #  
 
- 
+def bubbleSort(arr):
+    n = len(arr)
+    for i in range(n-1, 0, -1):
+        check = 0
+        for j in range(i):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                check = 1
+        if check == 0:
+            break
+    return arr
