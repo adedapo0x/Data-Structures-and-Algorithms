@@ -17,3 +17,32 @@
 
 # the input array is then updated by traversing through the indexes (left to right) and updates are made
 
+def merge(arr, left, mid, right):
+    temp = []
+    l, r = left, mid + 1
+    while l <= mid and r <= right:
+        if arr[l] <= arr[r]:
+            temp.append(arr[l])
+            l += 1
+        else:
+            temp.append(arr[r])
+            r += 1
+    while l <= mid:
+        temp.append(arr[l])
+        l += 1
+    while r <= right:
+        temp.append(arr[r])
+        r += 1
+    for i in range(left, right + 1):
+        arr[i] = temp[i - left]
+
+
+def mergeSort(arr, left, right):
+    if left >= right:
+        return
+    mid = (left + right) // 2
+    mergeSort(arr, left, mid)
+    mergeSort(arr, mid+1, right)
+    merge(arr, left, mid, right)
+
+    
