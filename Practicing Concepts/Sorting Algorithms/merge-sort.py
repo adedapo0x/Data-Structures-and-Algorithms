@@ -45,4 +45,9 @@ def mergeSort(arr, left, right):
     mergeSort(arr, mid+1, right)
     merge(arr, left, mid, right)
 
-    
+
+# Time Complexity: O(nlogn) <for best, average and worst case>
+# This is because say an element of size 16, takes only four operations to initially get it divided before merging
+
+# Space Complexity: O(n)
+# This is because of the temp array used in the merge function
