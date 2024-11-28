@@ -1,5 +1,22 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        # brute-force  solution:
+        # take every element of the string as a start of a sequence till the end and only break if duplicates are found
+        # we can check for duplicate in costant time using a set, once duplicate is found we break out of the inner loop and go to the next element in the string to use as the start of the sequence
+
+        # TC: O(N^2), SC: O(N)
+
+        longest = 0
+        for i in range(len(s)):
+            hashSet = set()
+            for j in range(i, len(s)):
+                if s[j] in hashSet:
+                    break
+                hashSet.add(s[j])
+            longest = max(longest, len(hashSet))
+        return longest
+
+
         # Thought process:
         # Have a set to check for duplicates, keep left & right pointer at 0 
         # loop through the input str and check each time if current char is in set, if not add and increment r, since that is a substr with no duplicate
