@@ -14,5 +14,18 @@ a.next = b
 b.next = c
 c.next = d
 
+# method to iteratively traverse through a linked list and print its values
+def print_ll(head):
+    current = head
+    while current is not None:
+        print(current.val)
+        current = current.next
+
+
+
+
+# print_ll(a)
+
+# recursive_printll(b)
 
 
