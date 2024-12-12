@@ -21,7 +21,12 @@ def print_ll(head):
         print(current.val)
         current = current.next
 
-
+# method to recursively traverse through a linked list and print its values
+def recursive_printll(head):
+    if head is None:
+        return
+    print(head.val)
+    recursive_printll(head.next)
 
 
 # print_ll(a)
