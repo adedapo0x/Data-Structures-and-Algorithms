@@ -17,6 +17,13 @@ class Solution:
         return prev
     
 
-       
+        # recursive method, TC: O(1), SC: O(N)
+        def reverse(head, prev=None):
+            if head is None:
+                return prev
+            nexxt = head.next
+            head.next = prev
+            return reverse(nexxt, head)
+        return reverse(head)
 
         
