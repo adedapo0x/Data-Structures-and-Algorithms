@@ -29,7 +29,6 @@ def reverse_list(head, prev=None):
   
 
 
-  
 # not optimal approach, uses TC of O(N+N) = O(N), SC = O(N)
 # def reverse_list(head):
 #   temp = []
