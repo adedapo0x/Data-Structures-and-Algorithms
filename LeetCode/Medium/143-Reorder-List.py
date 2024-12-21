@@ -3,6 +3,13 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
+        # Bruteforce way:
+        # Will be to go through the LL, store the nodes in an array, then use two pointers
+        # one at the beginning of the array, another at the end, then a loop, beginning points to end gets updated, end points to 
+        # new updated beginning, end gets updated, repeat and repeat. all the while ensuring that left pointer remains less than right, once greater, break
+        # TC: O(N), SC:O(N)
+
+        # Optimized way: TC: O(N), SC: O(1)
         # the algorithm is to divide the linked list into two, the first half stays the same 
         # the second half is reversed since we want our LL to consist of one from first half and one from second but starting from the end of the second
         # after splitting and sorting the second half, we merge them, no need to return anything since it is to be done inplace
