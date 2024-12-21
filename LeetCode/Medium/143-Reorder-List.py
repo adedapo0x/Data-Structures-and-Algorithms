@@ -3,16 +3,23 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        # t
+        # the algorithm is to divide the linked list into two, the first half stays the same 
+        # the second half is reversed since we want our LL to consist of one from first half and one from second but starting from the end of the second
+        # after splitting and sorting the second half, we merge them, no need to return anything since it is to be done inplace
 
-
+        # to split, we use a slow and fast pointer, the slow shifts once each time, fast shifts twice each time
+        # slow pointer starts from the first node, fast starts from the second node
+        # if odd number of nodes in LL, fast being None means end of the LL stop loop, if even number of nodes, fast.next being None means they are no other nodes after fast and having one more iteration won't work as None has no .next 
+        # where slow is at this point is the end of first LL, and slow.next is the beginning of second LL
+        # you can try it out with examples e.g  1,2,3,4 or 1,2,3
         slow, fast = head, head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
+        # after getting beginning of second LL, we reverse it
         second = slow.next
-        slow.next = None
+        slow.next = None # this makes end of first LL no longer point to beginning of second LL and points to None since we are dividing into two separates nodes
         prev = None
         while second:
             tempNext = second.next
@@ -20,9 +27,10 @@ class Solution:
             prev = second
             second = tempNext
 
+        # now we merge it, prev holds the beginning of the reversed LL
         first, second = head, prev
         while first and second:
             temp1, temp2 = first.next, second.next
             first.next = second
             second.next = temp1
-            first, second = temp1,temp2
+            first, second = temp1,temp2 
