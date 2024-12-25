@@ -9,6 +9,26 @@ class Solution:
         # new updated beginning, end gets updated, repeat and repeat. all the while ensuring that left pointer remains less than right, once greater, break
         # TC: O(N), SC:O(N)
 
+        nodes = []
+        curr = head
+        while curr:
+            nodes.append(curr)
+            curr = curr.next
+        l,r = 0, len(nodes) - 1
+        curr = head
+        count = 0
+        while l < r:
+            count += 1
+            if count % 2 != 0:
+                curr.next = nodes[r]
+                r -= 1
+            else:
+                l += 1
+                curr.next = nodes[l]
+            curr = curr.next
+        curr.next  = None
+
+
         # Optimized way: TC: O(N), SC: O(1)
         # the algorithm is to divide the linked list into two, the first half stays the same 
         # the second half is reversed since we want our LL to consist of one from first half and one from second but starting from the end of the second
