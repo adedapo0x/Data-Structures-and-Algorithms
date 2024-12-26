@@ -11,7 +11,31 @@ class Solution:
             Then we return dummy.next as it is the first copy and the beginning of the deep copy LL
         '''
 
-       
+        curr = head
+        while curr:
+            copy = Node(curr.val)
+            copy.next = curr.next
+            curr.next = copy
+            curr = curr.next.next
+
+        curr = head
+        while curr:
+            if curr.random:
+                curr.next.random = curr.random.next
+            else:
+                curr.next.random = None
+            curr = curr.next.next
+
+        dummy = Node(-1)
+        temp = dummy
+        curr = head
+        while curr:
+            temp.next = curr.next
+            curr = curr.next.next
+            temp = temp.next
+
+        return dummy.next
+
 
 
         ''' Two Pass with HashMap (TC: O(N), SC: O(N))
