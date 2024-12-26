@@ -1,6 +1,19 @@
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
 
+        ''' More Optimal Solution (TC: O(N), SC: O(1)) # SC: O(N) not considering the new LL that the question requires us to make
+            This approach removes the use of an hashmap, that the former solution below makes use of. The copy of the nodes are stored directly after the original nodes in the input LL by manioulating the next pointers
+            On the first pass, we create a copy of each node and we make the original node point to it, then the copy points to the next original node. Process is repeated till we get to the end of the LL
+            So at this stage, we have originalA -> copyA -> originalB -> copyB -> originalC...
+            Second pass takes care of the random pointers, if it doesn't point to None, we make the copy's random pointer point to the next node after where the original random points to (with our logic, this will be a copy of a node)
+            if None, we can just make it point to None
+            On the third pass, we create a dummy node in order to link our copies next pointer to form the LL to be returned. So dummy points to nearest copy and original points to its next original node as it was initially
+            Then we return dummy.next as it is the first copy and the beginning of the deep copy LL
+        '''
+
+       
+
+
         ''' Two Pass with HashMap (TC: O(N), SC: O(N))
             This approach makes use of an hashmap to store the nodes with it's copy in the first pass. This is because the random pointer could be pointing to nodes
             that we haven't gotten to yet. On the first pass we create a copy of each node in the input LL, storing original node as key and copy of node as value
