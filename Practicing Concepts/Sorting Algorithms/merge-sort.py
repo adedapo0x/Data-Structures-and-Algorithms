@@ -16,6 +16,10 @@
 # this goes on until one side is exhausted, then the rest of the other side is simply added to the end of the temp array, since each side would be sorted before the merge is called
 
 # the input array is then updated by traversing through the indexes (left to right) and updates are made
+# Note that while traversing, for the index at temp, we simply don't say arr[i] = temp[i], this would work for the left half of the divided array operations since the left where we start our loop from is always zero
+# so temp is always zero in that case, but for the right half, left doesn't start from 0, can start from 4 for an array of length 7, in that case temp[4] doesn't exist and leads to an out of bounds error, we will need to 
+# use i - left, works for both right and left half, since left is always zero for left, and for right: we initially want temp[0], first element of temp, so using left as 4 in an array of length 7, and since i starts from left, 
+# 4 - 4 = 0, then 5 - 4 = 1, ie temp[1] second element in temp and so on.
 
 def merge(arr, left, mid, right):
     temp = []
