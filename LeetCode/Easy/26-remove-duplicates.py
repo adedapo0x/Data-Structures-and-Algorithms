@@ -11,6 +11,19 @@ class Solution:
                 nums[j] = nums[i]
                 j += 1
         return j
+    
+
+        # two pointers approach (more like a rewrite of the first one, came up with it in revision)
+        if len(nums) == 1: return 1
+        l = r  = 1
+        n = len(nums)
+        while r < n:
+            if nums[r] != nums[r-1]:
+                nums[l] = nums[r]
+                l += 1
+            r += 1
+
+        return l
         
 
 
