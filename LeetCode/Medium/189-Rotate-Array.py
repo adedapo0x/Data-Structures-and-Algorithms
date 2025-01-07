@@ -20,3 +20,24 @@ class Solution:
         reverse(0, n-1)
         reverse(0, k-1)
         reverse(k, n-1)
+
+
+
+        # Uses extra memory to store the initial n - k elements, then we put the remaining k elements at the end of the array to the beginning of the array
+        # then the initial temp array created, we add it to fill the rest of the array
+        #  TC: O(K) + O(N-k) + O(K) = O(N+K) , SC: O(K)
+
+        n = len(nums)
+        k = k % n
+
+        temp = []
+        for i in range(n-k):
+            temp.append(nums[i])
+        j = 0
+        for i in range(n-k, n):
+            nums[j] = nums[i]
+            j += 1
+        j = 0
+        for i in range(k, n):
+            nums[i] = temp[j]
+            j += 1
