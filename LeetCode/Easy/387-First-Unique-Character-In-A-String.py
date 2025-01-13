@@ -1,5 +1,6 @@
 class Solution:
     def firstUniqChar(self, s: str) -> int:
+        # TC: O(2N) = O(N), SC: O(26) which is constant time, because the string can only consist of the lowercase letters which are 26 in number
         mapCount = {}
 
         for ch in s:
