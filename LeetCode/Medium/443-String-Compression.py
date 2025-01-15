@@ -2,6 +2,7 @@ class Solution:
     def compress(self, chars: List[str]) -> int:
         '''
         Logic is to use two pointers, the read pointer, traverses through the entire array. The write is to modify the array
+        TC: O(N), SC: O(1)
         '''
         read, write = 0, 0
         while read < len(chars):
