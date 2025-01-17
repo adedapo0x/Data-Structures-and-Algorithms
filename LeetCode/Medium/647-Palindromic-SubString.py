@@ -33,3 +33,27 @@ class Solution:
             l -= 1
             r += 1 
         return res
+    
+
+        # Brute force approach, TLE on leetcode
+        # The approach is to check every substring in the string and check which ones are palindrome. So we have two loops checking that is checking for each substring, this is an O(N^2) operation,
+        # then for each substring that we check, we then check if it is a palindrome, which is an O(N) operation,
+        # so TC: O(N^3), SC:O(1)
+        n = len(s)
+        count = 0
+        def checkPalindrome(subStr):
+            l = 0
+            r = len(subStr) - 1
+            while l < r:
+                if subStr[l] != subStr[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True            
+
+        for i in range(n):
+            for j in range(i, n):
+                if checkPalindrome(s[i:j+1]):
+                    count += 1
+    
+        return count
