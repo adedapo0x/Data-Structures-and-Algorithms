@@ -31,3 +31,24 @@ class Solution:
             r -= 1
         
         return sum(res)
+    
+
+        # Bruteforce, gets TLE
+        # Still uses the formular of min(leftMax, rightMax) - height[i] but we for each i we initially assume that height[i] is leftMax and rightMax,
+        # so in this case, we don't have to deal with potential negatives. For each height[i], we check the entire elements before and after it to try to 
+        # update its left and right max
+        # TC: O(N^2), SC: O(1)
+        n = len(height)
+        res = 0
+
+        for i in range(n):
+            leftMax = rightMax = height[i]
+
+            for j in range(i):
+                leftMax = max(leftMax, height[j])
+            for j in range(i+1, n):
+                rightMax = max(rightMax, height[j])
+            
+            res += min(leftMax, rightMax) - height[i]
+        return res
+
