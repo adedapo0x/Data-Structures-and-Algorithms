@@ -1,6 +1,32 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         '''
+        Optimal solution, TC: O(N), SC: O(1)
+        We use two pointers here, we set our left at the beginning, right at the end, and the maxLeft and maxRight to the values at the left and right respectively
+        In previous solution we did min(maxLeft, maxRight) - height[i]. We don't exactly need the exact maxLeft and maxRight here
+        We check if maxLeft <= maxRight, this means that for this to happen there has to be at least a block on the right with its length equal to or greater than maxLeft,
+        so we can safely use maxLeft as the minimum height required. Same for if maxRight < maxLeft (the else condition), ie there exists at least one block or structure on the left that is >= maxRight, 
+        so maxRight can be used. Then to avoid checking for negative values and to update our leftMax or rightMax, we do max(leftMax) - height[l]) or rightMax and r as the case may be.
+        TC: O(N), SC: O(1)
+        '''
+
+        n = len(height)
+        l, r = 0, n - 1
+        maxLeft = height[0]
+        maxRight = height[n-1]
+        res = 0
+        while l < r:
+            if maxLeft <= maxRight:
+                l += 1
+                maxLeft = max(maxLeft, height[l])
+                res += maxLeft - height[l]
+            else:
+                r -= 1
+                maxRight = max(maxRight, height[r])
+                res += maxRight - height[r]
+
+        return res
+        '''
         Approach is to use prefix and suffix arrays. The prefix array is to find the longest structure by the left of each index. Suffix is to find the
         longest by the right of each index. Note that first element would have a prefix of 0 and last element a suffix of 0. So if we have that, we take the minimum of both for each index,
         minimum because if we take the one that is greater, the water overspills. So for each index, we are checking the min(longestPrefix, longestSuffix) - height[i] 
