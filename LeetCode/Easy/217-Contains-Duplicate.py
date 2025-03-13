@@ -8,3 +8,7 @@ class Solution:
                 freqSet.add(x)
         return False
     
+
+        # a one liner
+        # compares the length since a set only allows one occurrence of an element
+        return len(nums) != len(set(nums))
