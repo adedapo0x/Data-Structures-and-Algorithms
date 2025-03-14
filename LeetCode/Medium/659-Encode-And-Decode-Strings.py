@@ -7,6 +7,7 @@ class Solution:
             strList.append(str(len(st)) + "%" + st)
         return "".join(strList)
 
+        # using string normally
         res = ""
         for s in strs:
             # there is need for the hash symbol because the length might not be just one digit
