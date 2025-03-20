@@ -7,7 +7,7 @@ class Solution:
         eat one pile per hour. 
         so we need to check for the values between 1 and max(piles) for the minimum value k can be, the optimal way is to use a binary search.
         so if we find a time that works, we check if there is a lesser time that also works and repeat till our binary search loop condition is invalid
-        TC: O(log(max(piles)).N) where N is the size of the piles array and we have log(max(piles)) since we're basically doing a binary search on a range of 1 to maxValue hence the log
+        TC: O(N*logM) where N is the size of the piles array, M is the max value in piles and we have log(M) since we're basically doing a binary search on a range of 1 to maxValue hence the log
         '''
 
         small, high = 1, max(piles)
@@ -27,3 +27,4 @@ class Solution:
 
         # Bruteforce solution follows similar thoughtprocess except that to check from 1 to maxValue we are using a linear search. so we are checking
         # every number in the range until we get to the first number in the range that it's possible to have Koko finish eating.
+        # TC: O(N*M) where N is the size of the piles array and M is the maximum element in piles array
