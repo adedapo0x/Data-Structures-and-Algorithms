@@ -23,3 +23,7 @@ class Solution:
             else:
                 small = mid + 1
         return k
+
+
+        # Bruteforce solution follows similar thoughtprocess except that to check from 1 to maxValue we are using a linear search. so we are checking
+        # every number in the range until we get to the first number in the range that it's possible to have Koko finish eating.
