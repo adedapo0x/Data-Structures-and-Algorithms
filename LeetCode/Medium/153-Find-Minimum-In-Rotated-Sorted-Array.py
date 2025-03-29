@@ -6,8 +6,7 @@ class Solution:
         # smaller than what we currently have and we run the same logic again
         # TC: O(logn), SC: O(1)
         l, r = 0, len(nums) - 1
-        minimumVal = nums[0]
-
+        minimumVal = nums[0]        
         while l <= r:
             # Another optimization can be done here that is not explained above (solution still works without it)
             # if at any point in time, our left to right is sorted, just have element at left as the answer if it is smaller than what is 
@@ -21,7 +20,7 @@ class Solution:
                 l = mid + 1
             else:
                 minimumVal = min(minimumVal, nums[mid])
-                r = mid - 1
+                r = mid - 1 
         return minimumVal
 
       
