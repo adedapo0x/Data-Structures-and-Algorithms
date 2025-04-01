@@ -23,8 +23,26 @@ class Solution:
             if node.left:
                 stack.append(node.left)
         return preorder
+    
+        # A cleaner way of doing it recursively, using a helper method defined outside the caller method
+        # recursive method also takes the array as an argument
+        order = []
+        if not root:
+            return order
+        self.preorder(root, order)
+        return order
+    
+    def preorder(self, root, order):
+        if not root:
+            return
+        order.append(root.val)
+        self.preorder(root.left, order)
+        self.preorder(root.right, order)
 
-        # Normal recursive way for doing preorder
+        # End of cleaner recursive wayy
+
+
+        # Another recursive way for doing preorder
         res = []
         def preOrder(root):
             if not root:
