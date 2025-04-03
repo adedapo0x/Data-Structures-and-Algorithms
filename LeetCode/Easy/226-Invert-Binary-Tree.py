@@ -14,6 +14,19 @@ class Solution:
         self.invertTree(root.right)
     
         return root
+    
+        # Uses iterative DFS
+        if not root:
+            return None
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            node.right, node.left = node.left, node.right
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return root
 
 
         # Using BFS to invert
