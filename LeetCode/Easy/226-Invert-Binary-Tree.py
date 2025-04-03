@@ -14,5 +14,19 @@ class Solution:
         self.invertTree(root.right)
     
         return root
+
+
+        # Using BFS to invert
+        if not root: return None
+        queue = collections.deque([root])
+        while queue:
+            node = queue.popleft()
+            node.right, node.left = node.left, node.right
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return root
+        
         
         
