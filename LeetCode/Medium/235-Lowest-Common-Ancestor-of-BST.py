@@ -14,6 +14,7 @@ class Solution:
         # 
         # Should the node value we are on be equal to either of the p and q given, or if our curr node value is in between p and q, lesser than one
         # but greater than the other, through examples we see that the node would also be our LCA, this is what is covered by the else statement and we just have to return that node. 
+
         curr = root
         while curr:
             if p.val > curr.val and q.val > curr.val:
@@ -22,11 +23,19 @@ class Solution:
                 curr = curr.left
             else:
                 return curr
+            
 
-
-
-
-        # my own murky solution after looking at neetcode's hints
+        # the recursive solution, still the same thought process as the iterative sha
+        if not root:
+            return
+        if max(p.val, q.val) < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif min(p.val, q.val) > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
+        
+        # my own murky iterative solution after looking at neetcode's hints
         curr = root
         while curr:
             mini, maxi = min(p.val, q.val), max(p.val, q.val)
@@ -36,4 +45,4 @@ class Solution:
                 curr = curr.left
             else:
                 curr = curr.right 
-        
+          
