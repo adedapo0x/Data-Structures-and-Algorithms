@@ -6,6 +6,28 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        '''
+        Optimal solution, TC: O(N). while checking for height, we immediately check if it is balanced at the same time, we want to return the height 
+        of the tree if it is balanced and -1 if it is not balanced.
+
+        '''
+        if not root:
+            return True
+        ans = self.dfsHeight(root)
+        return ans != -1
+
+    def dfsHeight(self, node):
+        if not node:
+            return 0
+        left = self.dfsHeight(node.left) 
+        if left == -1: return -1 # Once we get a -1, be prematurely returning till we get back to the root
+        right = self.dfsHeight(node.right)
+        if right == -1: return -1 # Once we get a -1, be prematurely returning till we get back to the root
+        if abs(left - right) > 1:
+            return -1  # This is how we get a -1 rather than the height returned below, ie the conditions we needed were not met
+        return max(left, right) + 1
+
+
         # Came up with this solution myself.
         # TC: O(N)
         if not root:
