@@ -1,5 +1,5 @@
-# function to reverse an array recursively
-# less efficient, yes I know. Upping my recursion game tho
+# function to reverse an array recursively using just one pointer
+# gotten from Striver's YT channel
 
 def reverseRecursively(arr,i):
     n = len(arr)
