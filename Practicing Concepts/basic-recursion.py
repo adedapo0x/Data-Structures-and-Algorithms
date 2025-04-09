@@ -16,3 +16,13 @@ def swap(arr, l, r):
         return arr
     arr[l], arr[r] = arr[r], arr[l]
     return swap(arr, l + 1, r - 1)
+
+
+# recursive function to check if a string is a palindrome
+def isPali(string, i):
+    n = len(string)
+    if i >= n // 2:
+        return True
+    if string[i] != string[n-i-1]: # uses the n-i-1 trick used in reversing an array solution that is above
+        return False
+    return isPali(string,i+1)
