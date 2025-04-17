@@ -27,6 +27,7 @@ class Solution:
         # Uses recursive backracking to include and exclude element
         # no memoization or DP optimization here, so I get a TLE on Geeks for Geeks code editor
         # TC: O(2^N), SC: O(N)
+        # here we also don't even need the temp unless we want to output the one subsequence rather than just returning True/false
         def check(indx, temp, total):
             if indx == N:
                 if total == K:
