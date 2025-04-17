@@ -33,6 +33,10 @@ class Solution:
                 arr.pop()
                 target += candidates[indx] # if we do what is in the comments to make it one line, no need for this addition, as target is the same when it returns
                 # if we don't actually alter the target value
+
+            # we leave this outside of the if statemnt above, cos if we can't readd the same element we added cos it goes out of bounds of target (ie from left tree),
+            # we still want to be able to get combinations from the right side of the tree, ie after adding that element, rather than readding we explore the next element
+            # Testcase of [8,7,4,3] with a target of 11 shows why putting the code like this is necessary
             compareTarget(indx+1, arr, target)
 
         compareTarget(0, [], target)
