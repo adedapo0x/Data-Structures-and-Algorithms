@@ -19,8 +19,33 @@ Explanation: There are no subsets of the array that sum up to the target 3.
 '''
 
 class Solution:
-    # There is a problem with this, works fine but I get TLE on GFG since TC here is o(2^n), and for large arrays this is a problem
+    # There is a problem with these two solutions below, same logic in both just different implementation, works fine but I get TLE on GFG since TC here is o(2^n), and for large arrays this is a problem
     # There is a memoization solution (DP) that runs faster, but haven't learnt DP yet, so this stays here for now I suppose
+    
+    def perfectSum(self, arr, target):
+        return self.checkTotal(0, 0, arr, target)
+    
+    # This is the better version that does not use global variables. and gets rid of having to use the temp data structure, we simply just add and deduct from
+    # total as we go
+    def checkTotal(self, indx, total, arr, target):
+        if indx == len(arr):
+            if total == target:
+                return 1 # if condition match, return 1 that is there is a valid subsequence that sum equals target
+            return 0 # return 0
+            
+        total += arr[indx]
+        left = self.checkTotal(indx+1, total, arr, target)
+        
+        total -= arr[indx]
+        right = self.checkTotal(indx+1, total, arr, target)
+        
+        return left + right # get for left, get for right,, add together, return sum
+	
+
+
+    # This was my naive solution kinda, apperently there is a better way to keep the count rather than using a global variable and without having to keep track of
+    # the subset array since we are not storing or printing each subset
+
     def perfectSum(self, arr, target):
         self.count = 0
 
