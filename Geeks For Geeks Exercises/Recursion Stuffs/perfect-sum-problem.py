@@ -28,6 +28,8 @@ class Solution:
     # This is the better version that does not use global variables. and gets rid of having to use the temp data structure, we simply just add and deduct from
     # total as we go
     def checkTotal(self, indx, total, arr, target):
+        if total > target: # This is because once total exceeds target, adding anything more is obvs also going to exceed target
+            return 0 # Note that this extra base case only holds if the arr elements are only positive values (no negative values)!
         if indx == len(arr):
             if total == target:
                 return 1 # if condition match, return 1 that is there is a valid subsequence that sum equals target
