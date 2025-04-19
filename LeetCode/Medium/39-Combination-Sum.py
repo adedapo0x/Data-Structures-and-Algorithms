@@ -12,7 +12,6 @@ class Solution:
         so when target equals 0 we know that the sum of all the elements in the arr is target.
 
         Base case is if target = 0, we have found one with sum as target, another is if we have checked all indexes, in order not to go out of bounds, we return
-
         '''
         res = []
         def compareTarget(indx, arr, target):
@@ -40,6 +39,27 @@ class Solution:
             compareTarget(indx+1, arr, target)
 
         compareTarget(0, [], target)
+        return res  
+
+        '''
+        Neetcode approach, quite similar, unlike in the above sol 
+        '''
+
+        res = []
+
+        def dfs(i, cur, total):
+            if total == target:
+                res.append(cur.copy())
+                return
+            if i >= len(candidates) or total > target:
+                return
+
+            cur.append(candidates[i])
+            dfs(i, cur, total + candidates[i])
+            cur.pop()
+            dfs(i + 1, cur, total)
+
+        dfs(0, [], 0)
         return res
             
         
