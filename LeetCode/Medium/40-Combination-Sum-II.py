@@ -22,3 +22,26 @@ class Solution:
                 temp.pop()
         dfs(0, [], target)
         return res
+    
+
+        # Brute force approach, works but gets TLE on Leetcode
+        # Similar code to Combination 1, but since we can't repeat same index here, we change the initial recursion call to index and to deal with 
+        # duplicates we make use of a set. a tuple to wrap our temp since a list cannot be added to a set as it is mutable.
+        # TC: O(n * 2^n) 
+        candidates.sort()
+        res = set()
+        def dfs(indx, temp, total):
+            if total == target:
+                res.add(tuple(temp[:]))
+                return
+            if indx == len(candidates) or total > target:
+                return
+
+            temp.append(candidates[indx])
+            dfs(indx+1, temp, total + candidates[indx])
+            temp.pop()
+            dfs(indx+1, temp, total)
+
+        dfs(0, [], 0)
+        ans = [list(combination) for combination in res]
+        return ans
