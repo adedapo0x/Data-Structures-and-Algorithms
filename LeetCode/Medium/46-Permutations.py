@@ -7,7 +7,8 @@ class Solution:
         2,1 or 2,3. and on and on till we get the temp array same length as num meaning all the elements are in there.
         The use of a set here is to allow for constant lookup of whether an element is in the array during the recursion rather than doing a O(N) for every check
 
-        
+        TC: O(N! * N), N! because we generate N! combinations and N because we loop from 0 to N everytime
+        SC: O(N + N) = O(N) the two N are for the list and set used, here we ignore the output array that has space comp of O(N!)
         '''
         res = []
         def computePermute(temp, tempSet):
