@@ -24,3 +24,30 @@ class Solution:
 
         getSubset(0, [])
         return res
+
+        '''
+        Bruteforce approach,
+        This is to generate all possible subsets while using a set to get rid of duplicates, then converting the set of tuples to a list of list 
+        at the end. we use a tuple for each subset as list are not hashable in a set/dictionary because they are mutable.
+        TC: O(N* 2^N) + O(2^N), the addition of O(2^N) is gotten from converting O(2^N) to a list back before returning res
+        SC: O(2^N)
+        '''
+        ansSet = set()
+        nums.sort()
+
+        def subset(indx, temp):
+            if indx == len(nums):
+                ansSet.add(tuple(temp[:]))
+                return
+
+            temp.append(nums[indx])
+            subset(indx+1, temp)
+            temp.pop()
+
+            subset(indx+1, temp)
+        subset(0, [])
+        return [list(item) for item in ansSet]
+
+
+        
+        
