@@ -1,5 +1,23 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        # (Best way) Similar approach to the solution below, but here the subsets are being appended as we go down the recursion tree, not waiting till we
+        # are returning. This way we can add the empty subset naturally
+        # TC and SC are same as the solution below
+        res = []
+        nums.sort()
+        def getSubsets(indx, temp):
+            res.append(temp[:])
+            for i in range(indx, len(nums)):
+                if i > indx and nums[i] == nums[i-1]:
+                    continue
+
+                temp.append(nums[i])
+                getSubsets(i+1, temp)
+                temp.pop()
+        
+        getSubsets(0, [])
+        return res
+
         '''
         Came up with this solution myself. After sorting so we can get the duplicates side by side, in this solution, the empty array which is a subset is not gotten from the solution
         so we cover that edgecase by including it from the beginning. Then we run the recursion knowing that from every index we can choose from index up to the last 
