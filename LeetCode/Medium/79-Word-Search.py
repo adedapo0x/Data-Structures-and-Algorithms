@@ -13,9 +13,33 @@ class Solution:
         TC: O(m * n * 4 ^ k), here m * n since we have to go through the entire board linearly, m length of board(rows), n is length of inner (cols)
         the 4 * k because for each character in the worst case we have to do recursion 4 times to check all adjacent sides where k is the length of the word  
         SC: O(K), k is the length of the word, where O(K) is the auxilliary stack space
+
+        Note: I added the prunings in response to the follow up question on leetcode to search prune for larger boards 
         '''
         ROWS = len(board)
         COLS = len(board[0])
+
+        # Pruning 1: Figuring out if board has enough letters as what is in word
+        # if it doesn't that means it can never be true
+        count = {}
+        for i in range(ROWS):
+            for j in range(COLS):
+                count[board[i][j]] = count.get(board[i][j], 0) + 1
+
+        need = {}
+        for ch in word:
+            need[ch] = need.get(ch, 0) + 1
+            if need[ch] > count.get(ch, 0):
+                return False 
+        # if this return False, TC would then be O(N*M + K) rather than the expensive O(N * M * 4 ^ K) only to still get False
+        # End of pruning 1, if it does, allow DFS to run
+
+        # Pruning 2: Starting from the rare letter end in word to reduce the DFS calls, since if the first letter in word occurs a lot
+        # in the board, more DFS calls would be made, so we reverse to start from the one with lesser frequency in the board
+        if count[word[0]] > count[word[-1]]:
+            word = word[::-1]
+
+        # End of pruning 2
 
         def backtrack(r, c , indx):
             if indx == len(word):
@@ -44,6 +68,8 @@ class Solution:
         Same approach as above, but here, we use a set to determine if we have come across a particular character in the matrix for a particular run by storing the index positions of r and c in a 
         tuple and putting them in a set, if we have we return False as we cannot reuse the same letter cell for a particular check
         don't forget to remove the indexes of that r and c as we backtrack back up our recursion tree
+
+        Pruning added above works here too
         '''
 
 
