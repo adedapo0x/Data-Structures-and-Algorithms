@@ -31,3 +31,31 @@ class Solution:
         for n in adj[node]:
             if visited[n] != 1:
                 self.doDfs(n, adj, res, visited)
+
+    def dfs(self, adj):
+            '''
+            Iterative approach to doing the DFS using a stack. We keep it running till the stack is empty that is no more nodes to output. we start with our
+            start node in the stack ( 0 if 0-indexed, or 1 if 1-indexed), then we pop, add all its neighbours to the stack, and start popping from the neigghbours in the next
+            while iteration , repeat repeat. 
+
+            We use a set to keep track of if we have visited a node i.e has been outputted before, similar to using a set with its index as node
+            We are reversing since we want to follow the order given in the question, i.e follow how it is arranged in the adjacency list
+            '''
+            start = 0
+            stack = [start]
+            visited = set()
+            res = []
+            
+            while stack:
+                node = stack.pop()
+                if node in visited: # extra check here is cos we can have the same nodes multiple times in our stack and we only one to output once
+                    continue
+                    
+                visited.add(node)
+                res.append(node)
+                
+                # Add neighbors in reverse order directly
+                for neighbor in reversed(adj[node]): # returns an iterator not a list, but it does the job since we are just iterating, could hav used [::-1] here too
+                    if neighbor not in visited: # only add to 
+                        stack.append(neighbor)
+        
