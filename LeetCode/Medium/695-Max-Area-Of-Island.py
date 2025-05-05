@@ -1,7 +1,13 @@
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         '''
-        Similaar approach to number of Islands problem, 
+        Similaar approach to number of Islands problem (LC 200), but here we are trying to get the area of each of the islands then find the maximum
+        So here using a DFS, for each beginning of an island we encounter, we then count one for that island and try to fetch the nodes of all the other
+        four directions recursively. 
+
+        so after we are done with an island and it has returned the area, we compare it with our maxArea variable that we are using to keep the max of the areas found so far
+
+        TC and SC: O(M * N), this can also be done with BFS, prolly do that some other time.
         '''
         ROWS = len(grid)
         COLS = len(grid[0])
