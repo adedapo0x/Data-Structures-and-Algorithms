@@ -43,3 +43,31 @@ class Solution:
 
                     queue.append((rNeighbour, cNeighbour))
                     visited.add((rNeighbour, cNeighbour))
+
+    '''
+    The DFS solution, same logic, but thisi time the traversal is done using DFS algorithm
+    '''
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        ROWS = len(grid)
+        COLS = len(grid[0])
+        visited = set()
+        islandCount = 0
+
+        for m in range(ROWS):
+            for n in range(COLS):
+                if (m, n) not in visited and grid[m][n] == "1":
+                    islandCount += 1
+                    self.dfs(m, n, visited, grid)
+
+        return islandCount
+
+    def dfs(self, row, col, visited, grid):
+        if (row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]) or (row, col) in visited or grid[row][col] == "0"):
+            return
+
+        visited.add((row, col))
+        positions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+
+        for rIndx, cIndx in positions:
+            self.dfs(row + rIndx, col + cIndx, visited, grid)
