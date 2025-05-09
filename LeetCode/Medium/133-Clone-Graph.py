@@ -18,7 +18,7 @@ class Solution:
         TC: O(V + E) where V and E are the vertices and edges respectfully as we literally go through each vertex(node) and edge
         '''
         if not node:
-            return None
+            return None 
 
         oldToClone = {}
 
@@ -34,5 +34,30 @@ class Solution:
         
         return clone(node)
 
-            
+        '''
+        BFS Approach: We use a queue as usual in BFS and the oldToClone map. So we start with starting node(usually 1 as given in the problem
+        statement), putting the node in the queue and storing its clone in the map. then we popleft, go through each of the neighbors and clone and append them
+        too
+        '''
+        if not node:
+            return None
+        oldToClone = {}
+
+        def clone(node):
+            copy = Node(node.val)
+            oldToClone[node] = copy
+            queue = collections.deque([node])
+
+            while queue:
+                curr = queue.popleft()
+                for n in curr.neighbors:
+                    if n not in oldToClone:
+                        copy = Node(n.val)
+                        oldToClone[n] = copy
+                        queue.append(n)
+                    oldToClone[curr].neighbors.append(oldToClone[n])
+        
+        clone(node)
+        return oldToClone[node]
+    
         
