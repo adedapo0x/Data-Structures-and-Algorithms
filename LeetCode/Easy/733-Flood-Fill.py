@@ -4,18 +4,21 @@ class Solution:
         Having to create a new copy of image since it is good practice to not mutate the input data unless specified.
         TC: O(NM) + O(4 * NM) = O(NM), in worst case scenario, the entire image is of the same color, so we have to traverse through the entire image
         and for each position, we have to check 4 adjacent positions, so we have that
-        SC: 
+        SC: O(NM) + O(NM), for copied array output and stack space.
         '''
         ROWS, COLS = len(image), len(image[0])
         positions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
         begin = image[sr][sc]
-        copy = []
+        # copy = []
         
-        for row in image:
-            temp = []
-            for item in row:
-                temp.append(item)
-            copy.append(temp)
+        # # for row in image:
+        # #     temp = []
+        #     for item in row:
+        #         temp.append(item)
+        #     copy.append(temp),
+
+        # more concise and shorter way of making the copy using list comprehension
+        copy = [row[:] for row in image]
 
         def dfs(r, c, prev):
             if (r < 0 or r == ROWS or c < 0 or c == COLS or copy[r][c] == prev
