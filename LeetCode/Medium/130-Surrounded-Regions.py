@@ -31,12 +31,25 @@ class Solution:
                 neiR, neiC = dr + r, dc + c
                 capture(neiR, neiC)
 
-
+        # more optimal way to check for 0s on the board rather than going through the array and checking for conditions
         for r in range(ROWS):
-            for c in range(COLS):
-                if board[r][c] == "O" and (r == 0 or r == ROWS - 1 
-                    or c == 0 or c == COLS - 1):
-                    capture(r, c)
+            if board[r][0] == "O":
+                capture(r, 0)
+            if board[r][COLS - 1] == "O":
+                capture(r, COLS - 1)
+
+        for c in range(COLS):
+            if board[0][c] == "O":
+                capture(0, c)
+            if board[ROWS - 1][c] == "O":
+                capture(ROWS - 1, c)
+
+        # less optimal way of checking the edges
+        # for r in range(ROWS):
+        #     for c in range(COLS):
+        #         if board[r][c] == "O" and (r == 0 or r == ROWS - 1 
+        #             or c == 0 or c == COLS - 1):
+        #             capture(r, c)
 
         for r in range(ROWS):
             for c in range(COLS):
