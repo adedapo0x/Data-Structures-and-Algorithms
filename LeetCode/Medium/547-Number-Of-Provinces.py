@@ -6,7 +6,9 @@ class Solution:
 
         Note that we are given input as an adjacency matrix, we could have converted to an adjacency list and used it that way too, (adjacency
         list -> a list which key represents node and the values are arrays of their connections)
-        
+
+        TC: O(N) + O(V + 2E) where N is for the outer loop and V + 2E is for TC for DFS of an undirected graph.
+        SC: O(N) + O(N) for visited set and stack space
         '''
         ROWS = len(isConnected)
         visited = set()
