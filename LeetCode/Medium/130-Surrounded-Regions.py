@@ -4,6 +4,20 @@ class Solution:
         Do not return anything, modify board in-place instead.
         """
 
+        '''
+        Since we want to check for Os connected both horizontally and vertically that are surrounded by X completely and we do not want 
+        to include the Os by the edge of the board since they'll be a part not actually surrounded by X,
+
+        The approach here is to get all Os at the edge of the board since we won't be considering them, run a dfs from that position to check 
+        for any other connected n so we don't consider them also since they'll have a region at the edge of the board, and temporarily changing them to another
+        symbol say T for example, (we mutate the board and not use a list to keep track of Os at the edge so we avoid extra space being used), 
+
+        so after the Os at the edge and their connected Os have been changed to something else so we don't consider them, we run a loop on the board to change all 
+        the Os in the board to X (since we are now totally sure that the Os are not at the edge of the board) and change the Ts back to Os
+
+        TC: O(MN)
+        SC: O(MN) prolly due to stack space 
+        '''
         ROWS, COLS = len(board), len(board[0])
         positions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
