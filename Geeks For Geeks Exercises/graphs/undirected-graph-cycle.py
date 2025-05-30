@@ -41,4 +41,32 @@ class Solution:
                     return True
         return False
             
+
+    def isCycle(self, V, edges):
+        adj = defaultdict(list)
+        visited = set()
+        
+        for node1, node2 in edges:
+            adj[node1].append(node2)
+            adj[node2].append(node1)
+            
+        def dfs(node, parent):
+            visited.add(node)
+            
+            for val in adj[node]:
+                if val not in visited:
+                    if dfs(val, node):
+                        return True
+                elif val != parent:
+                    return True
+            return False
+            
+        
+        for n in range(V):
+            if n not in visited:
+                if dfs(n, -1):
+                    return True
+                    
+        return False
+	
         
