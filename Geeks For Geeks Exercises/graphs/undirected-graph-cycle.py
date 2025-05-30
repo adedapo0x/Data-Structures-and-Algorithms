@@ -41,7 +41,14 @@ class Solution:
                     return True
         return False
             
+    '''
+    Solving the problem with DFS this time around. Still similar approach, we run a DFS from statrting nodes using a visited set to keep track
+    of nodes that we have previously seen. Similar to BFS way, if we come across a node that we have seen but is not the parent of the node
+    we are currently at, means there is a cycle and we return True
 
+    TC: O(V + 2E) + O(V)
+    SC: O(V)
+    '''
     def isCycle(self, V, edges):
         adj = defaultdict(list)
         visited = set()
@@ -68,5 +75,3 @@ class Solution:
                     return True
                     
         return False
-	
-        
