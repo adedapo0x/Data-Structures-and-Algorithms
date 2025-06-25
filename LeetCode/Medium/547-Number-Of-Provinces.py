@@ -27,6 +27,36 @@ class Solution:
                 count += 1
                 dfs(r)
         return count
+    
+
+        '''
+        Another way that converts the list given to an adjacency list (hashmap for easier intuition)
+        problem is we use extra time and space
+        '''
+        adjDict = {}
+
+        for i in range(len(isConnected)):
+            adjDict[i] = []
+            for j in range(len(isConnected[i])):
+                if isConnected[i][j] == 1 and i != j:
+                    adjDict[i].append(j)
+        
+        visited = set()
+
+        def dfs(val):
+            visited.add(val)
+            for n in adjDict[val]:
+                if n not in visited:
+                    dfs(n)
+
+
+        provinces = 0
+        for i in range(len(isConnected)):
+            if i not in visited:
+                provinces += 1
+                dfs(i)
+
+        return provinces
 
 
 
