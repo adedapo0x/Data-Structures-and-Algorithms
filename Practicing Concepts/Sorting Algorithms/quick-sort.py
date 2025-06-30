@@ -22,9 +22,13 @@ After placing the pivot in the partition index(within the partition() function s
 So, the range of the left subarray will be [low to (partition index - 1)] and the range of the right subarray will be [(partition index + 1) to high]. 
 This is how the recursion will continue until the range becomes 1, ie only one element left in the subarrays(which is sorted already on its own)
 
-TC: O(nLogn), SC: O(1)
+TC: Best and average case is nLogn, SC: O(1) not considering recursion stack space
 Note that the actual worse case would be O(N^2) if we end up picking the largest or smallest element as the pivot always, ie the array is already sorted
-or reverse sorted
+or reverse sorted, this can be mitigated by picking random pivot positions, or taking median of first, last and middle element as the pivot, to reduce the chances of bad split
+
+NOTE: The entire approach here is using the Hoare Partition Scheme. There is another way called Lomuto Partition Scheme, where we always choose the
+last element as the pivot and traverse from the beginning of the array up until before the pivot, comparing elements with pivot and swapping as we go.
+can check it out later
 '''
 
 
