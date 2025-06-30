@@ -42,15 +42,17 @@ class Solution:
         j = high
         
         while i < j:
-            while arr[i] <= pivot and i < high:
+            # this keeps running until we find a greater element that needs to go to the right
+            while arr[i] <= pivot and i < high:  # i < high, so we don't go out of bounds as we increment i
                 i += 1
+            # this keeps running until we find a smaller or equal element that needs to go to the left
             while arr[j] > pivot and j > low:
                 j -= 1
                 
-            if i < j:
+            if i < j: # swap keeps occuring until the i and j cross i.e i becomes greater than j
                 arr[i], arr[j] = arr[j], arr[i]
                 
-        arr[low], arr[j] = arr[j], arr[low]
-        return j
+        arr[low], arr[j] = arr[j], arr[low] # swaps element at pivot with partition indexx
+        return j # returns partition index
              
             
