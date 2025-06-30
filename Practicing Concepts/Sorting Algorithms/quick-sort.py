@@ -23,6 +23,8 @@ So, the range of the left subarray will be [low to (partition index - 1)] and th
 This is how the recursion will continue until the range becomes 1, ie only one element left in the subarrays(which is sorted already on its own)
 
 TC: O(nLogn), SC: O(1)
+Note that the actual worse case would be O(N^2) if we end up picking the largest or smallest element as the pivot always, ie the array is already sorted
+or reverse sorted
 '''
 
 
