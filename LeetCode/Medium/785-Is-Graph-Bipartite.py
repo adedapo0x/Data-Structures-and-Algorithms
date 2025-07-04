@@ -12,6 +12,11 @@ class Solution:
         we initialize the colors array that represents what color is in each node with -1. Then we traverse from the beginning of the graph, then put opposite colors, 0 then 1,
         0 then 1 again and again. As we traverse through the graph, should we come across a neighbour that already has the same color as the one we have already, we return False
 
+
+        Note (to be implemented later perhaps) : Another way I think this can be done (haven't verified this) is to check if there is a cycle, if there isn't, we can automatically return True
+        as a linear graph can be bipartite. But, if a cycle exists we count the edges that make up the cycle, once it is odd we can return False else True, since we
+        know that an odd length cycle graph can never be bipartite. 
+
         TC: O(V + 2E) since it is basically a DFS traversal
         SC: O(V) cos of the colors array
         '''
