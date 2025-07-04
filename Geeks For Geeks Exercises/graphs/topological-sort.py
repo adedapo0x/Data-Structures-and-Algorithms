@@ -27,8 +27,8 @@ class Solution:
         stack = []
         ans = []
         
-        for i in range(len(edges)):
-            adj[edges[i][0]].append(edges[i][1])
+        for node, neighbour in edges:
+            adj[node].append(neighbour)
                 
         
         def dfs(node):
