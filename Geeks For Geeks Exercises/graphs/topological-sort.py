@@ -10,7 +10,17 @@ Note: As there are multiple Topological orders possible, you may return any of t
 
 from collections import defaultdict
 class Solution:
-    
+    '''
+    The approach here is simple. We use DFS to traverse through the graph. Initially, I converted the input 2D array edges given into an adjacency list
+    for easy traversal, then we run a for loop checking in case of possible disconnected components running a DFS on unseen nodes 
+
+    We use a visited set to keep track of nodes we have previously been at, a stack for our topo sort. We start our DFS and keep on going further down the
+    recursion tree until we can no longer go further as there are no more unseen nodes, then keep pushing to the stack, as we go up the recursion tree, 
+    then after the DFS is done, we keep on popping from the stack unto our ans array which is what we return as our output
+
+    TC: O(V + E) since we are doing a typical DFS on a directed graph
+    SC: O(N), we are using a stack and a visited set.
+    '''
     def topoSort(self, V, edges):
         adj = defaultdict(list)
         visited = set()
