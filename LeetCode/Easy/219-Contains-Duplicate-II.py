@@ -23,6 +23,39 @@ class Solution:
         return False
 
         
-        
+        '''
+        works but it is slow. Here the approach is to initially traverse through the list and keep track of the indexes with the same value using a 
+        dictionary, the key is the number, the value is an array of indexes where the numbers occur.
+
+        we then go through the values of the hashmap, if it has a length greater than 1, means there are duplicates, then we go through that index list
+        to check if our abs(i - j) <= k condition holds. if so, then we return True.
+
+        TC: O(N), SC: O(N)
+        '''
+        # hashMap = defaultdict(list)
+
+        # for i in range(len(nums)):
+        #     hashMap[nums[i]].append(i)
+
+        # for val in hashMap.values():
+        #     if len(val) > 1:
+        #         for i in range(len(val) - 1):
+        #             if abs(val[i] - val[i+1]) <= k:
+        #                 return True
+
+        # return False
+
+
+
+        # works but I get TLE
+        # n = len(nums)
+
+        # for i in range(n - 1):
+        #     for j in range(i+1, n):
+        #         if nums[i] == nums[j] and abs(i - j) <= k:
+        #             return True
+
+        # return False
+
 
         
