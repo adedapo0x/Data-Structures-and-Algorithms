@@ -10,6 +10,19 @@ from typing import List
 sys.setrecursionlimit(10**8)
 class Solution:
     def countDistinctIslands(self, grid : List[List[int]]) -> int:
+        '''
+        This is an extension of the Number of Islands problem. Here, the approach is very similar to what we do in the Number of Islands problem.
+        But here, for each islands we come across we need a way to store the shape of how the islands look like, if we decide to just store the indexes of
+        the islands we come across, when we come across one of same shape, even though they have the same shape, we won't be able to recognize since they will
+        obvs have different indexes
+
+        So the best way to go about storing the distinct shapes is to use the first index of the island as a base, so we subtract every other land index positions that make up
+        the island from the first land index, we find out that for similar shape islands we get the same indexes. So these subtracted indexes for a particular island
+        is stored in a list as we go through the island. After we are done, with the islands, we store the list in a set cos it filters the duplicates out (in
+        actuality, we add the tuple of the list elements to the set, since lists as itself cannot be hashed)
+
+        Then after everything, we can simply return the length of the set as that would contain the distinct tuples that represents the islands.
+        '''
         ROWS = len(grid)
         COLS = len(grid[0])
         visited = set()
