@@ -35,3 +35,37 @@ class Solution:
         return True
     
 
+        '''
+        Here, we use BFS approach, the Khan Algorithm, to determine if there is a cycle in the graph
+        How we know this is, if at the end of it all, the number of nodes in the list we are using to keep track of the topo sort is not equal to 
+        the total number of nodes in the graph
+
+        that points to the fact that there are still nodes without indegree of 0, due to them still needing something that needs them also (ie a cycle exists)
+        '''
+
+        
+        adjList = { c: [] for c in range(numCourses)}
+        indegree = [0] * numCourses
+        ans = []
+
+        for course, prereq in prerequisites:
+            adjList[prereq].append(course)
+            indegree[course] += 1
+
+        queue = collections.deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+
+        while queue:
+            node = queue.popleft()
+            ans.append(node)
+
+            for n in adjList[node]:
+                indegree[n] -= 1
+                if indegree[n] == 0:
+                    queue.append(n)
+
+        return True if len(ans) == numCourses else False
+    
+
