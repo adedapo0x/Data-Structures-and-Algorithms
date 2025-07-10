@@ -1,6 +1,42 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         '''
+        Still similar logic as the solutions below, but here I use a single array indexes to keep track of if our node has been previously visited and if it 
+        is still in the traversal path. 
+        We use 1 to signify if we are still in that path and 2 if we have returned from that path and do not need to consider traversing there again so we can simply return False
+        if we encounter a neighbour with an index of 1 that means it is visited, and we have come across something that is still along the path we are currently at
+        so this is a cycle.
+
+        TC: O(V+E) since it is still kind of basically a DFS traversal
+        '''
+        visited = [0] * numCourses
+        adjList = defaultdict(list)
+
+        for node, neighbour in prerequisites:
+            adjList[neighbour].append(node)
+
+        def dfsCheck(node):
+            if visited[node] == 1:
+                return True
+            if visited[node] == 2:
+                return False
+
+            visited[node] = 1
+
+            for n in adjList[node]:
+                if dfsCheck(n):
+                    return True
+
+            visited[node] = 2
+            return False
+
+        for i in range(numCourses):
+            if visited[i] == 0:
+                if dfsCheck(i):
+                    return False
+        return True
+
+        '''
         This is basically a question that requires us to check if the directed graph that is formed from the courses relationship is cyclic.
         So, here I use dfs with two separate arrays, one for visited and one for the path we are currently visiting.
         If cycle exists, we cannot finish and we return False, else we return True
