@@ -79,6 +79,8 @@ class Solution:
         that points to the fact that there are still nodes without indegree of 0, due to them still needing something that needs them also (ie a cycle exists)
         '''
 
+        # note that we do not necessarily need to keep track of the topo sort using the ans array, we could simply use a counter here
+        # saves the extra memory that the ans array causes.
         
         adjList = { c: [] for c in range(numCourses)}
         indegree = [0] * numCourses
