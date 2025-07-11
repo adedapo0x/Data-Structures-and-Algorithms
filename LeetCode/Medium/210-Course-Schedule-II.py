@@ -1,5 +1,36 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        visited = [0] * numCourses
+        adjList = defaultdict(list)
+
+        for node, neighbour in prerequisites:
+            adjList[neighbour].append(node)
+
+        def dfsCheck(node):
+            if visited[node] == 1:
+                return True
+            if visited[node] == 2:
+                return False
+
+            visited[node] = 1
+
+            for n in adjList[node]:
+                if dfsCheck(n):
+                    return True
+
+            visited[node] = 2
+            return False
+
+        for i in range(numCourses):
+            if visited[i] == 0:
+                if dfsCheck(i):
+                    return False
+        return True
+
+
+
+
+
         '''
         naive way of solving this, I first check if there is a cycle, if there is I return an empty list, if there is no cycle, then I 
         do a topological sort which is what the question is about actually.
