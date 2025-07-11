@@ -1,34 +1,37 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        visited = [0] * numCourses
-        adjList = defaultdict(list)
+        '''
+        Here we use the Khan Algorithm to detect if a cycle exists if it doesn't we return the topo sort array generated.
+
+        So if the length of the topo array is not equal to the number of total courses at the end of the code, then there is a cycle and we return 
+        an empty array, else we return the topo sort.
+
+        '''
+        
+        adjList = {c: [] for c in range(numCourses)}
+        queue = collections.deque()
+        indegree = [0] * numCourses
+        topo = []
 
         for node, neighbour in prerequisites:
             adjList[neighbour].append(node)
-
-        def dfsCheck(node):
-            if visited[node] == 1:
-                return True
-            if visited[node] == 2:
-                return False
-
-            visited[node] = 1
-
-            for n in adjList[node]:
-                if dfsCheck(n):
-                    return True
-
-            visited[node] = 2
-            return False
+            indegree[node] += 1
 
         for i in range(numCourses):
-            if visited[i] == 0:
-                if dfsCheck(i):
-                    return False
-        return True
+            if indegree[i] == 0:
+                queue.append(i)
 
+        while queue:
+            node = queue.popleft()
+            topo.append(node)
 
+            for n in adjList[node]:
+                indegree[n] -= 1
 
+                if indegree[n] == 0:
+                    queue.append(n)
+
+        return topo if len(topo) == numCourses else []
 
 
         '''
