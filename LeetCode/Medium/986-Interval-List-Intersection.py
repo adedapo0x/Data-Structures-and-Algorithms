@@ -1,6 +1,22 @@
 class Solution:
     def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+        '''
+        Optimal way to solve this is to use two pointers, we keep an index on firstList and another on the secondList
 
+        so first we get our start and end elements for the indexes we are in at both p1 and p2
+        for this question, there can be 3 conditions:
+        1. if the start of the inner array in second list is bigger than the end of the inner array of the first list, then there is obvs no intersection and we need to 
+            shift our pointer of the inner arrays of the first list to the right, bigger elements on the right since it is sorted
+        2. if the start of the inner array in first list is bigger than the end of the inner array of the second list, so we obvs no intersection here again and we need to shift the 
+            pointer for the inner arrays of our second list
+        3. third option, there is an intersection, so we need to basically catch all the intersections, so we pick the highest between the start numbers
+            and the lowest between the end numbers
+            then after that, to determine which pointer shifts, we check which has the higher value at the end, and shift the one with the lower value, in case if the one
+            with the higher end value still has an array that it has an intersection with
+
+        TC: O(M + N) where M is the length of first list, N is length of second list
+        SC: O(1) if we do not consider the output list, O(N) if we do
+        '''
         if not firstList or not secondList:
             return []
 
