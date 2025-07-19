@@ -14,9 +14,26 @@ class Solution:
             hashMap[s[r]] = r  # update hashMap if present before, or add new elements to the hash
             longest = max(longest, r - l + 1)
         return longest
+    
+        # this is like the one above, but here we are using a set rather than using a dictionary. and here we keep shifting until we remove the s[r] that has previously been seen
+        # unlike the one above where we can figure out which index to go to next exactly
+        # TC is still O(N)
+
+        l = 0
+        maxLen = 0
+        substring = set()
+        for r in range(len(s)):
+            while s[r] in substring:
+                substring.remove(s[l])
+                l += 1
+
+            substring.add(s[r])
+            maxLen = max(maxLen, r - l + 1)
+ 
+        return maxLen
 
 
-        # Better solution 
+        # Better solution, think I came up with this myself. not so right in implementation I think
         # Thought process:
         # Have a set to check for duplicates, keep left & right pointer at 0 
         # loop through the input str and check each time if current char is in set, if not add and increment r, since that is a substr with no duplicate
