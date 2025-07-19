@@ -37,4 +37,33 @@ class Solution:
                 maxSum = max(total, maxSum)
 
         return maxSum
+    
+
+        '''
+        Bruteforce/naive solution - gets TLE on leetcode
+
+        Here, what we do is to loop through the array and go through each subarray of length k, once we come across a duplicate, we break.
+        We want to still check after the inner loop, cos of the case when we break due to there being duplicates, ie subarray is not valid, without
+        that check of length, we still go ahead to compare maxSum value which is not what we want.
+
+        TC: O(N . K) where N is size of input list and K is len of subarray to be checked
+        SC: O(K)
+        '''
+        if len(nums) < k: # don't bother if the length of the input list is not even up to the length of subarrays we want to check ie k
+            return 0
+
+        maxSum = 0
+        for i in range(len(nums) - k + 1): # we loop from 0 up until the where we would still be able to get k subarray after that index
+            subarray = set() # to check for duplicate values in the subarray
+            total = 0
+            for j in range(i, i+k):
+                if nums[j] in subarray:
+                    break
+                total += nums[j]
+                subarray.add(nums[j])
+            if len(subarray) == k:
+                maxSum = max(maxSum, total)
+
+        return maxSum
+
         
