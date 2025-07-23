@@ -30,6 +30,15 @@ class Solution:
                     return result
 
 
+        '''
+        less optimal solution
+        uses a hashmap to store occurrences, then we run a loop k times to get the k top frequent elements, then we go through the hashmap to see the onee
+        with the max frequency, then we store its key in the hashmap, then delete that key from the hashmap so we can get the next frequent element
+
+        TC: O(N^2), O(N) for hashmap, then considering in worst case, k can be n and the array can consist of n unique elements, 
+        so the second for loop, has a TC of O(N^2) that way.
+
+        '''
         count = {}
         for n in nums:
             count[n] = count.get(n, 0) + 1
