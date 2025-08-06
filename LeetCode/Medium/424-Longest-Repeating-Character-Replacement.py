@@ -36,4 +36,25 @@ class Solution:
 
 
 
+        '''
+        The bruteforce approach to this problem. The intuition is similar, but we do not use sliding window pattern here
+        we  determine the amount of letters that needs changing by taking the subtraction of the length of the substring to the max frequence of 
+        letters in the substring
 
+        so we start from the beginning of the string, using a hashmap for each outer iteration, this is used to keep frequency of the letters in the substring,
+        then we calculate if we can change (ie still within limit of k), once we aren't we break and we start checking from the next letter 
+
+        TC: O(N^2), SC: O(M) where N is the length of the string and M is the number of unique characters in the string
+        '''
+        maxLen = 0
+
+        for i in range(len(s)):
+            count = {}
+            for j in range(i, len(s)):
+                count[s[j]] = count.get(s[j], 0) + 1
+                if (j - i + 1) - max(count.values()) <= k:
+                    maxLen = max(maxLen, j - i + 1)
+                else:
+                    break
+        return maxLen
+                
