@@ -2,6 +2,25 @@ from collections import deque
 
 class Solution:
     def isValid(self, s: str) -> bool:
+
+        # More concise way of writing the solution
+        stack = []
+        closeToOpenMap = {
+            ")": "(",
+            "]": "[",
+            "}": "{"
+        }
+
+        for ch in s:
+            if ch in closeToOpenMap:
+                if stack and stack[-1] == closeToOpenMap[ch]:
+                    stack.pop()
+                else:
+                    return False
+            else:
+                stack.append(ch)
+        return True if len(stack) == 0 else False
+    
         # first solution; without helper function
 
         stack = deque()
