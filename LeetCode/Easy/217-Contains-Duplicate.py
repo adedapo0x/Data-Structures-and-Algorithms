@@ -23,3 +23,6 @@ class Solution:
         #         return True
 
         # return False
+
+        # worst bruteforce solution would be to use two loops, start from i, j runs from i to the end of the array
+        # TC here would be O(N^2)
