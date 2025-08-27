@@ -4,7 +4,43 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         '''
+        Slightly better solution than the one directly below it, as it removes redundancy and is more straightforward.
+
+        Here we have two arrays, row and col used to keep track of if any of the elements in that row or column equals zero, if any of them should
+        equal zero, then that entire row or col should contain 0. Hence we mark it as 1 in the row or col array
+        The row and col array is first initialized to 0, so when we come across a zero for that row or column, we then mark as 1, knowing we are to change values at that index to 0
+
+        we traverse through the matrix, and use the row and col array to keep track of where needs to be changed. then we traverse again to do the changing this time around,
+        so for each position matrix[i][j] once one of the i or j equals 1 in the row/col array, we turn that element to 0 as requested by the question
+
+        TC: O(2.M.N) = O(MN)
+        SC: O(M) + O(N)
+
+        The difference between this and the solution immediately below this is the space complexity, we only need to store for a row and a column once, since
+        once one of them is zero, all should be made zero, rather than storing all the indexes of the elements which leads to bigger memory used actually (think its O(M.N)) 
+
+        '''
+
+        ROWS, COLS = len(matrix), len(matrix[0])
+        row = [0] * ROWS
+        col = [0] * COLS
+
+        for i in range(ROWS):
+            for j in range(COLS):
+                if matrix[i][j] == 0:
+                    row[i] = 1
+                    col[j] = 1
+
+        for i in range(ROWS):
+            for j in range(COLS):
+                if row[i] == 1 or col[j] == 1:
+                    matrix[i][j] = 0
+
+
+
+        '''
         Use a set to keep track of the indexes that have zero and go through it again to check the rows and columns there
+        TC: O(M.N) + O()
         '''
         ROW, COL = len(matrix), len(matrix[0])
         checker = set()
