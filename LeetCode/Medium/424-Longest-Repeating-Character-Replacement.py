@@ -45,6 +45,8 @@ class Solution:
         then we calculate if we can change (ie still within limit of k), once we aren't we break and we start checking from the next letter 
 
         TC: O(N^2), SC: O(M) where N is the length of the string and M is the number of unique characters in the string
+
+        Think this gives TLE on leetcode
         '''
         maxLen = 0
 
