@@ -6,7 +6,7 @@
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # iterative method TC: O(1), O(N)
+        # iterative method TC: O(N), SC: O(1)
         current = head
         prev = None
         while current:
@@ -17,7 +17,7 @@ class Solution:
         return prev
     
 
-        # recursive method, TC: O(1), SC: O(N)
+        # recursive method, TC: O(N), SC: O(N)
         def reverse(head, prev=None):
             if head is None:
                 return prev
