@@ -14,7 +14,7 @@ class Solution:
         while curr:
             nodes.append(curr)
             curr = curr.next
-        l,r = 0, len(nodes) - 1
+        l,r =   0, len(nodes) - 1
         curr = head
         count = 0
         while l < r:
@@ -39,6 +39,8 @@ class Solution:
         # if odd number of nodes in LL, fast being None means end of the LL stop loop, if even number of nodes, fast.next being None means they are no other nodes after fast and having one more iteration won't work as None has no .next 
         # where slow is at this point is the end of first LL, and slow.next is the beginning of second LL
         # you can try it out with examples e.g  1,2,3,4 or 1,2,3
+
+        # think this works if you use slow = fast = head too, the goal is to just partition the LL, you can check it out with examples
         slow, fast = head, head.next
         while fast and fast.next:
             slow = slow.next
