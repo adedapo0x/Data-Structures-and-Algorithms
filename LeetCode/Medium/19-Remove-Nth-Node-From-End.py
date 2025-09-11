@@ -22,10 +22,6 @@ class Solution:
         return dummy.next #returns head
 
 
-        # a two pass method of O(N) TC would be to reverse the LL, then delete from the front
-        # this is a two pass algorithm, can be done in one pass
-
-
         # slightly better bruteforce, we do one pass here, only issue is the extra space we use
         nodes = []
         curr = head
@@ -70,3 +66,36 @@ class Solution:
             curr.next = None  # point to it since it doesn't have anything after to otherwise point to
         
         return dummy.next
+    
+
+
+        # a three pass method of O(N) TC would be to reverse the LL, then delete while tracking from the front, then reverse again
+        # this is a three pass algorithm, can be done in one pass
+
+        prev = None
+        curr = head
+
+        while curr:
+            nextt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextt
+    
+        dummy = ListNode(0, prev)
+        curr = dummy
+        pos = 0
+        while curr:
+            if pos == n - 1:
+                curr.next = curr.next.next
+                break
+            curr = curr.next
+            pos += 1
+
+        curr = dummy.next
+        prev = None
+        while curr:
+            nextt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextt
+        return prev
