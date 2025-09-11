@@ -53,7 +53,15 @@ class Solution:
         we find out that at the end, the final merged sorted LL that contains all the LL is in the last index of the lists array
         and we can then return this.
 
-        
+        for the TC, take N as the average/longest length of a LL in the array of LLs
+        so each time we have to go through 2 LLs and their sizes keep increasing
+        so 2N + 3N + 4N + 5N + ... + kN, this is the cost as we proceed down the array
+        this is equal to N (2 + 3 + 4 + 5 + ... k), the expression in the bracket is an ariithmetic progression, so we can use sum of an AP
+        so we use sum = n / 2 ( a + L ), where n = k - 1, a = 2, L = k
+        so we get sum (k - 1)(k + 2) / 2, so the we have N * k * k after removing constants and bringing back the N we factorized
+        so we can say TC is O(N * k^2)
+        we can say TC is O(M * k) where M is the total number of nodes in the array which is N * k, so they are still the same
+         
         SC: O(1), no extra space was used
         '''
         if not lists:
