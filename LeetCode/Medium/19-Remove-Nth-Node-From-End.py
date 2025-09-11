@@ -25,6 +25,28 @@ class Solution:
         # a two pass method of O(N) TC would be to reverse the LL, then delete from the front
         # this is a two pass algorithm, can be done in one pass
 
+
+        # slightly better bruteforce, we do one pass here, only issue is the extra space we use
+        nodes = []
+        curr = head
+        while curr:
+            nodes.append(curr)
+            curr = curr.next
+        
+        if len(nodes) == 1:
+            return None
+
+        pos = len(nodes) - n 
+
+        if pos == 0: # this occurs if n is len(nodes), so they want us to remove the first element
+            return head.next
+
+        nodes[pos - 1].next = nodes[pos].next # skips the particular node, we are looking for, no need to 
+        return head
+    
+
+
+
         # bruteforce solution(came up with this)
         # stores nodes in array, then pass through once again skipping the nth one
         # TC: O(N), SC: O(N)
