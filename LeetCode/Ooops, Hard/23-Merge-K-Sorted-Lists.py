@@ -36,3 +36,33 @@ class Solution:
         if curr2:
             temp.next = curr2
         return dummy.next
+
+
+
+        """
+        Bruteforce approach is to go through each LL one after the other while storing their values in an array, then sort those values
+        then go through the sorted array, creating nodes of each val and linking them to each other
+
+        TC: O(NlogN) where N is the total number of nodes in the linked lists in the lists array
+        technically we have O(N) getting values, O(NlogN) sorting, O(N) creating linked nodes again. so yeah, O(NlogN) is the dominant term
+        SC: O(N) used to store the node values 
+        """
+
+        nodes = []
+        for li in lists:
+            while li:
+                nodes.append(li.val)
+                li = li.next
+
+        nodes.sort()
+
+        dummy = ListNode()
+        curr = dummy
+
+        for val in nodes:
+            node = ListNode(val)
+            curr.next = node
+            curr = curr.next
+
+        return dummy.next
+
