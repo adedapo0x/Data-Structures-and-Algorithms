@@ -22,6 +22,11 @@ class Solution:
             return True
         if not root and subRoot:
             return False
+        
+        # Simpler way of writing the conditions above since LC constraints say the subtree is never going to be None
+        # if not root:
+        #     return False
+
         if self.isSameTree(root, subRoot):
             return True
         return (self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot))
