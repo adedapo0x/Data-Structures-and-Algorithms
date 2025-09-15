@@ -1,5 +1,10 @@
 class Solution:
     def multiply(self, mat1: List[List[int]], mat2: List[List[int]]) -> List[List[int]]:
+        '''
+        Optimal way of solving this problem
+        the meaning of sparse matrix is that 
+        '''
+        
         m, n, p = len(mat1), len(mat1[0]), len(mat2[0])
 
         hashMap1 = {}
@@ -45,10 +50,7 @@ class Solution:
         
         so TC: O(i*j*k) which is obviously not optimal
         '''
-        
     
-
-
 
         # res = [[0] * len(mat2[0])  for i in range(len(mat1))]
 
