@@ -18,6 +18,9 @@ class Solution:
         non-zero values and the formular mat2[k][j] would fail, so we continue,
         but if the k exists in hashMap2, ie there is a row k that has non zero values, and we then use it for our res[i][j] calculation
         we get j (col in mat2) from it and the actual value stored 
+
+        TC: about O(nZ1 * nZ2) where nZ1 and nZ2 are the number of nonzero elements in mat1 and mat2
+        SC: O(nZ1 + nZ2 + m*p) the m*p is if we are considering the space taken the result matrix
         '''
         
         m, n, p = len(mat1), len(mat1[0]), len(mat2[0])
