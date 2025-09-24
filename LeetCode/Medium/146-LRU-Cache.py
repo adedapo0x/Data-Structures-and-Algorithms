@@ -1,3 +1,75 @@
+class Node:
+    def __init__(self, key, val):
+        self.key, self.val = key, val
+        self.next = self.prev = None
+
+class LRUCache:
+    '''
+    Optimal approach is to use a doubly linked list to maintain the order rather than a list. Still the same ordering tho, most recently used would be at the end of the linked list
+    and least frequently used will be at the start. so when we get or put, we adjust in the LL
+
+    in the dict, we store the key given as the key and the node representing that key in the LL. the node would contain the key, value with both prev and next pointers
+    we created a Node object by ourselves up. we also need dummy head and tail, so we can immediately tell the first element when we want to remove the LRU using the dummyHead.next,
+    and also get the last node in the LL went we want to put a node as our most recent by doing dummyTail.prev. 
+
+    we also create helper functions removeNode and addToBack.
+    removeNode removes the node from its position in the LL, ie it connects what was before and after the node together, so the node is no longer in between them
+    the addToBack is used to update our order as the most recently used, so we connect last node before dummy tail to it and connect it with the dummy tail, effectively making it the new last
+    node before the dummy tail
+
+    TC: O(1), SC: O(N)
+    '''
+
+    def __init__(self, capacity: int):
+        self.cap = capacity
+        self.cache = {}
+        self.dummyHead = Node(0, 0)
+        self.dummyTail = Node(0, 0)
+        self.dummyHead.next = self.dummyTail
+        self.dummyTail.prev = self.dummyHead
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        node = self.cache[key]
+        value = node.val
+        self.removeNode(node)
+        self.addToBack(node)
+
+        return value
+        
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            node = self.cache[key]
+            node.val = value
+            self.removeNode(node)
+            self.addToBack(node)
+        else:
+            node = Node(key, value)
+            self.cache[key] = node
+            self.addToBack(node)
+
+            if len(self.cache) > self.cap:
+                nodeAfterHead = self.dummyHead.next
+                self.removeNode(nodeAfterHead)
+                nodeAfterHead.next = nodeAfterHead.prev = None
+                del self.cache[nodeAfterHead.key]
+
+    def removeNode(self, node):
+        after, prev = node.next, node.prev
+        prev.next = after
+        after.prev = prev
+
+    def addToBack(self, node):
+        tailPrev = self.dummyTail.prev
+        tailPrev.next = node
+        node.prev = tailPrev
+        node.next = self.dummyTail
+        self.dummyTail.prev = node
+
+
+
 class LRUCache:
     '''
     bruteforce approach
