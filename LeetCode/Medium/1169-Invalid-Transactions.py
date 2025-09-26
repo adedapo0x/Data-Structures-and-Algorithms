@@ -1,5 +1,41 @@
 class Solution:
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
+        """
+        The approach here is to use a dict as an additional data structure when compared to the solution below. In the initial solution, we were comparing each transaction with all the 
+        other transactions after it in the list even if they were not from the same person, we still had to iterate through it. But with this, we can iterate through only the transactions for a 
+        particular person
+        we check for Rule 1 when we populate the parsed and mapping, a
+        rule 2, is checked for each transaction, we loop through all other transactions made by the same person, this reduces the work we do rather than having to check
+        even with other people's own
+
+        TC: O(N.M), worst case O(N^2). where N is the size of the transactions and M is the average size of a transaction per person.
+        in worse case, all transactions are carried out by the same person, so we end up doing N.N
+        SC: O(N)
+
+        """
+        mapping = defaultdict(list)
+        invalid = set()
+
+        parsed = []
+        for i in range(len(transactions)):
+            name, time, amount, city = transactions[i].split(',')
+            parsed.append((name, int(time), int(amount), city, i))
+
+            if int(amount) > 1000: 
+                invalid.add(i)
+
+            mapping[name].append([int(time), int(amount), city, i])
+
+        for i in range(len(parsed)):
+            name = parsed[i][0]
+            nameTransactions = mapping[name]
+            for trans in nameTransactions:
+                if abs(parsed[i][1] - trans[0]) <= 60 and parsed[i][3] != trans[2]:
+                    invalid.add(parsed[i][4])
+                    break
+
+        return [transactions[i] for i in invalid]
+
         '''
         Approach here is we parse the input strings to make it more easier to understand working with. for each string, we split and put in a tuple,
         also including its position in the transactions list. we use a set to keep track of indexes of invalid transacctions. we do not store the invalid transaction
