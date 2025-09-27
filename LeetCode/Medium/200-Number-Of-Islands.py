@@ -71,3 +71,14 @@ class Solution:
 
         for rIndx, cIndx in positions:
             self.dfs(row + rIndx, col + cIndx, visited, grid)
+
+    # another more intuitive way the dfs could have been impelemented similar to the bfs style also 
+    # this function would have to be inside the main function btw
+    # def dfs(r, c):
+    #     visited.add((r, c))
+    #     for dr, dc in positions:
+    #         neiR, neiC = r + dr, c + dc
+    #         if (neiR >= 0 and neiR < ROWS and neiC >= 0 and neiC < COLS and 
+    #             grid[neiR][neiC] == "1" and (neiR, neiC) not in visited):
+
+    #             dfs(neiR, neiC)
