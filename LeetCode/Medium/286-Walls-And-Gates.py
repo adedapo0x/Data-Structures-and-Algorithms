@@ -44,6 +44,7 @@ class Solution:
 
 
         '''
+        TLE on Leetcode
         We use normal BFS here to traverse through all valid positions and once we find a 0 we return the amount of steps it took to get there.
         We go through every single element and when we come across an inf we call a BFS on it to possibly alter its value, important to note that
         each bfs call for each INF element uses a separate visited set, so we have to instantiate the set within the BFS function and not make it a global variable
