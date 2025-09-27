@@ -1,6 +1,38 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         '''
+        Approach here is just an optimization in the implementation of the expand from center approach below
+        we use a helper function, which just checks from the particular indexes outwards, note what we return, we return l + 1 and r - 1 because the loop would stop
+        when the condition is false not at the indexes of the palindrome, so we need to adjust them back by 1
+
+        and for each index, we check for even and odd length palindromes, and compare with our resL and resR which is to hold the start and stop indexes of our 
+        longest substring, 
+
+        TC: O(N^2) surely this time around
+        SC: O(1)
+        '''
+        resL = resR = 0
+
+        def expandOutwards(l, r):
+            while l >= 0 and r < len(s) and s[r] == s[l]:
+                l -= 1
+                r += 1
+            return (l + 1, r - 1)  # when loop breaks l and r are beyond valid palindrome
+
+        for i in range(len(s)):
+            oddL, oddR = expandOutwards(i, i)
+
+            evenL, evenR = expandOutwards(i, i + 1)
+            
+            # update our resL and resR once we find any longer even or odd length palindrome
+            if oddR - oddL > resR - resL:
+                resL, resR = oddL, oddR
+            if evenR - evenL > resR - resL:
+                resL, resR = evenL, evenR
+    
+        # return the actual longest palindromic string, +1 because of python string slicing format
+        return s[resL:resR+1]
+        '''
         Approach here is that we change how we check for palindromes, in the solution below, we checked for palindromes from the edges inwards, and we had to generate all possible 
         substrings before we could check which gave it O(N^3), but here we check from inwards to outwards. 
         we take every index as if it were the middle of the palindrome and expand outwards to check if the characters match and keep expanding till characters do not match
