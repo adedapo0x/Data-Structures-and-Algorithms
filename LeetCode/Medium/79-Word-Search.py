@@ -10,9 +10,18 @@ class Solution:
         this works because we have a constraint that both board and word consist of only English letters. Then when we backtrack up back we simply turn it back to what was there before,
         note that we store the character in a temp variable before changing it to #
 
+        Here we also optimized how we handle when one of the calls return True. in the second implementation that is below, the code we wrote still does the checks of other 
+        branches as it returns up the recursion tree even though we have found true. say we got True from top, we still check for right, bottom and co as we go up. this is unnecessary
+        here, once we find true, we keep on changing the character back to what it was and returning the True without checking any other branches.
+
         TC: O(m * n * 4 ^ k), here m * n since we have to go through the entire board linearly, m length of board(rows), n is length of inner (cols)
         the 4 * k because for each character in the worst case we have to do recursion 4 times to check all adjacent sides where k is the length of the word  
         SC: O(K), k is the length of the word, where O(K) is the auxilliary stack space
+
+        for the TC above, we can kind of trim it down to O(m * n * 3 ^ k) because here we exclude the back edge ie the parent that generated that choice, so
+        we only really have 3 choices that may or may not return False.
+        also good to note that the average case is not as bad as this O(m * n * 3 ^ k) as most of these branches die early either from having been used within that search 
+        or from it not matching the character we want or from being out of bounds
 
         Note: I added the prunings in response to the follow up question on leetcode to search prune for larger boards 
         '''
@@ -50,13 +59,14 @@ class Solution:
             temp = board[r][c]
             board[r][c] = "#"
 
-            top = backtrack(r + 1, c, indx + 1)
-            right = backtrack(r, c + 1, indx + 1)
-            bottom = backtrack(r - 1, c, indx + 1)
-            left = backtrack(r, c - 1, indx + 1)
+            for dr, dc in positions:
+                nr, nc = dr + r, dc + c
+                if backtrack(nr, nc, indx + 1):
+                    board[r][c] = temp
+                    return True
 
             board[r][c] = temp
-            return top or right or bottom or left
+            return False
 
         for r in range(ROWS):
             for c in range(COLS):
@@ -85,9 +95,9 @@ class Solution:
 
             visited.add((r, c))
 
-            top = backtrack(r + 1, c , indx+1)
+            top = backtrack(r - 1, c , indx+1)
             right = backtrack(r, c + 1, indx+1)
-            bottom = backtrack(r - 1, c, indx + 1)
+            bottom = backtrack(r + 1, c, indx + 1)
             left = backtrack(r, c - 1, indx + 1)
 
             visited.remove((r, c))
