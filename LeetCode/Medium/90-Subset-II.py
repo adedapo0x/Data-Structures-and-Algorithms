@@ -47,6 +47,11 @@ class Solution:
         Bruteforce approach,
         This is to generate all possible subsets while using a set to get rid of duplicates, then converting the set of tuples to a list of list 
         at the end. we use a tuple for each subset as list are not hashable in a set/dictionary because they are mutable.
+
+        the reason why we sort here is in order to not allow duplicates sneak in, say we have nums as nums = [2, 1, 2],
+        without sorting we would generate [2, 1] and later [1, 2] and both are treated as different subsets in the set, whereas mathematically they
+        are the same, so with sorting, we have [1, 2, 2] and we only end up with [1, 2] multiple times that the set can filter out accurately
+        
         TC: O(N* 2^N) + O(2^N), the addition of O(2^N) is gotten from converting O(2^N) to a list back before returning res
         SC: O(2^N)
         '''
