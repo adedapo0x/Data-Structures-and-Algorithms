@@ -53,3 +53,30 @@ class Solution:
             k -= 1
         return curr
         
+
+        '''
+        Bruteforce way of solving this, just store the nodes in a list, and reverse in groups of k, then merge all of them together as a LL
+        by connecting their .next to the next one as they are now ordered the way we want them
+        TC is O(N), SC: O(N)
+        '''
+
+        if k == 1:
+            return head
+
+        nodes = []
+        curr = head
+        # putting the nodes in a list
+        while curr:
+            nodes.append(curr)
+            curr = curr.next
+
+        # reversing k by k 
+        for i in range(0, len(nodes), k):
+            if i + k <= len(nodes):
+                nodes[i:i+k] = reversed(nodes[i:i+k])
+
+        # connecting the nodes to one another
+        for i in range(len(nodes) - 1):
+            nodes[i].next = nodes[i+1]
+        nodes[-1].next = None # making sure the last node points to null
+        return nodes[0]
