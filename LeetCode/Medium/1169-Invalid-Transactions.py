@@ -8,6 +8,9 @@ class Solution:
         rule 2, is checked for each transaction, we loop through all other transactions made by the same person, this reduces the work we do rather than having to check
         even with other people's own
 
+        note that we should not use "continue" after invalidating a transaction cos of the amount is greater than 1000, if we use continue that means that transacttion would not in parsed and our ddictionary
+        we do not want this, because that transaction can still be the cause why another transaction is invalidated through Rule 2
+
         TC: O(N.M), worst case O(N^2). where N is the size of the transactions and M is the average size of a transaction per person.
         in worse case, all transactions are carried out by the same person, so we end up doing N.N
         SC: O(N)
