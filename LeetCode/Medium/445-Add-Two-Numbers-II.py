@@ -6,6 +6,43 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         '''
+        here rather than reversing, we use stacks. one stack for each LL, so we push them in, so as we pop, we get the digits at the back first, 
+        which is what we need. here, we also do not need the dummy node (could have done without it in the reversing approach too tbh) 
+        as we create nodes we point them to head, which initially is None, then shift head pointer to the node we just created, at the end of it all, 
+        head would point to the beginning of the answer as we want it
+
+        TC: O(M + N)
+        SC: O(M + N) because of the stack
+        '''
+
+
+        stack1 = []
+        stack2 = []
+
+        carry = 0
+        while l1:
+            stack1.append(l1.val)
+            l1 = l1.next
+
+        while l2:
+            stack2.append(l2.val)
+            l2 = l2.next
+
+        head = None
+
+        while stack1 or stack2 or carry:
+            val1 = stack1.pop() if stack1 else 0
+            val2 = stack2.pop() if stack2 else 0
+
+            total = val1 + val2 + carry
+            remainder = total % 10
+            carry = total // 10
+            node = ListNode(remainder)
+            node.next = head
+            head = node
+
+        return head
+        '''
         Here, we reverse each LL then the question basically becomes Add Two Numbers (LC Question 2), then after the addition, we unlink the dummy 
         and then returned the reverse of the new LL
 
