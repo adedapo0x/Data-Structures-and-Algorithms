@@ -8,11 +8,21 @@ class Solution:
         hashMap = {} # to ensure there is no duplicacy
         l = longest = 0
 
+        # more intuitive way of writing the same for loop directly below, we only truly consider it being in the hashmap if its index is within the 
+        # range of the substring we are currently looking at
+        for r in range(len(s)):
+            if s[r] in hashMap and hashMap[s[r]] >= l:
+                l = hashMap[s[r]] + 1
+
+            hashMap[s[r]] = r
+            longest = max(longest, r - l + 1)
+
         for r in range(len(s)):
             if s[r] in hashMap:
                 l = max(hashMap[s[r]] + 1, l) # max function is used here in case where the element initially occurs is no longer in the window we are considering
             hashMap[s[r]] = r  # update hashMap if present before, or add new elements to the hash
             longest = max(longest, r - l + 1)
+
         return longest
     
         # this is like the one above, but here we are using a set rather than using a dictionary. and here we keep shifting until we remove the s[r] that has previously been seen
