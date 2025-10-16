@@ -29,6 +29,19 @@ class Solution:
                 count += freq[i]
 
         return count
+    
+        '''
+        Similar idea has above, just with hashmaps instead, since the strings are of the same length, we only need to check for what is in s that t lacks
+        '''
+        sHash = Counter(s)
+        tHash = Counter(t)
+
+        count = 0
+        for c in sHash:
+            if sHash[c] > tHash.get(c, 0):
+                count += sHash[c] - tHash.get(c, 0)
+
+        return count
         '''
         Not optimal
         This approach here is to count the freq of characters in both s and t using two different hashmaps, then we go through sHash storing characters of s
