@@ -12,7 +12,8 @@ class Solution:
         be mindful of negative powers too, we do not care about them in our recursion, and so we use abs, when we want to split power, raised to -5 and raised to 5 is the same,
         only that after we get the final answer, we do 1/res if the power was negative.
 
-        TC: O(logN) since I am splitting power by 2, each time. where n is 
+        TC: O(logN) since I am splitting power by 2, each time. where n is the power
+        SC: O(logN) due to the recursion stack space
         '''
         def findPowerOf(x, n):
             if x == 0:
@@ -26,3 +27,25 @@ class Solution:
 
         res = findPowerOf(x, n)
         return res if n >= 0 else 1/res # after we have gotten the actual value, then if negative power, we then do 1/res
+    
+
+
+
+        '''
+        Another approach, gives TLE on Leetcode
+        The more straightforward way of doing this is to use just keep muliplying the number x given by itself n times, we do not mind the negative sign if present,
+        abs(n) takes care of that, and after getting the value if power was indeed negative we just return 1/res
+
+        TC: O(N), SC: O(1)
+        '''
+        if x == 0:
+            return 0
+        if n == 0:
+            return 1
+
+        count = res = 1
+        while count <= abs(n):
+            res *= x
+            count += 1
+
+        return res if n >= 0 else 1/res
