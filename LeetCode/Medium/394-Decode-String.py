@@ -43,8 +43,11 @@ class Solution:
 
         when we are doing going over s, we can then join all what is in stack together, and that would give us our decoded string
 
-        TC: O(N * maxK * countK)
-        tc and sc are somehow
+        TC: O(N + M) where N is the length of the input string and M is the length of the decoded string, 
+        because we go through the entire string, and for each decoding of a section, we are creating new string taking time relative to the length of the entire decoded string
+        also the final .join call also takes O(M), so total is O(N + M)
+        
+        SC: O(N + M), the stack may hold near about the entire input string, so O(N) and the output string that we generate is O(M)
         '''
         stack = []
 
