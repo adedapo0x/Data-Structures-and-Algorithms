@@ -35,3 +35,23 @@ class Solution:
                 s[i] = c
                 i += 1
         return s[:i]
+
+        '''
+        bruteforceyy, gets TLE on Leetcode
+        Here, we basically do what the questions ask, we scan through the string, if we see duplicates of size 2 we get rid of them then we start 
+        from the beginning again to look for duplicates
+
+        TC: O(N^2)
+        SC: O(1)
+        
+        '''
+        i = 0
+
+        while i < len(s) - 1:
+            if s[i] == s[i+1]:
+                s = s[:i] + s[i+2:]
+                i = 0
+            else:
+                i += 1
+
+        return s
