@@ -15,3 +15,23 @@ class Solution:
                 stack.append(c)
 
         return "".join(stack)
+
+
+        '''
+        Doesn't work in Python!
+        The purpose of this is to get an O(1) space solution without a stack. We cannot do this in Python since strings are immutable, so we cannot directly assign a character to an index eg s[i] = c, 
+        To get constant space, we could simulate the stack in the string without actually using the stack. we keep pointer i to denote where the simulated stack is, and c is used 
+        to traverse the array, so if we come across a lettter that is in s[i-1] that is the top of the simulated stacck that means there are adjacent duplicates, then we can decrement 
+        i by one to reduce the simulated stack. If the elements are different we update the the indx i and move forward
+
+        
+        '''
+        i = 0
+
+        for c in s:
+            if i > 0 and s[i-1] == c:
+                i -= 1
+            else:
+                s[i] = c
+                i += 1
+        return s[:i]
