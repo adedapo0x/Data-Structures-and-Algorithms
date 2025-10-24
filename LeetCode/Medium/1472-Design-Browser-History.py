@@ -45,6 +45,50 @@ class BrowserHistory:
         
 
 
+
+'''
+Another way to do this is to use two stacks and a current variable. one stacks holds history, when we visit new sites, we put the previous currents there
+then the other stack is future, for when we want to go back and forth to store the ones that are ahead as we go back
+
+to initialize, our homepage is set to current, when we visit a site, we want to put our current in the history stack and then set our current to this new url that 
+we want to visit. to go back, we basically start appending to future as we pop from current, then to go forward, we append to history as we pop from forward
+also, not that for visit, we want to clear future each time, cos in case we were on leetcode in the sequence, leetcode -> facebook -> instagram, visiting another site from
+leetcode clears facebook and instagram
+
+TC: for visit, O(1), for back and forward, O(min(m,n)) where m is the m is the maximum number of steps to og forward or backword and n is the number of visit calls made.
+SC: O(N)
+'''
+class BrowserHistory:
+    def __init__(self, homepage: str):
+        self.history = []
+        self.future = []
+        self.current = homepage
+        
+    def visit(self, url: str) -> None:
+        self.history.append(self.current)
+        self.current = url
+        self.future = []
+        
+    def back(self, steps: int) -> str:
+        count = 0
+        while count < steps and self.history:
+            count += 1
+            self.future.append(self.current)
+            self.current = self.history.pop()
+        return self.current
+
+    def forward(self, steps: int) -> str:
+        count = 0
+        while count < steps and self.future:
+            count += 1
+            self.history.append(self.current)
+            self.current = self.future.pop()
+
+        return self.current
+
+
+
+
 # Your BrowserHistory object will be instantiated and called as such:
 # obj = BrowserHistory(homepage)
 # obj.visit(url)
