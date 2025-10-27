@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     '''
-    Approach here is to use DFS to go level by level and as we go level by level we keep track of the column at which we saw each node.
+    Approach here is to use BFS to go level by level and as we go level by level we keep track of the column at which we saw each node.
     we use a hashmap to store the nodes on the same col, and we have them in the correct order since we are going top to bottom through my BFS. 
     hashmap stores colNum -> [nodes in that col], and since the way we return the nodes in the col is expected to follow each other, we maintain a minCol
     and a maxCol variable as we know that will be the range of columns we have as keys in the hashmap
@@ -36,3 +36,24 @@ class Solution:
                 queue.append((node.right, col + 1))
             
         return [columns[col] for col in range(minCol, maxCol + 1)]
+    
+# Less optimal, Still same BFS approach, but here we sort the keys rather than maintaining minCol and maxCol from the start
+# TC: O(NlogN), SC: O(N)
+class Solution:
+    def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        columns = defaultdict(list)
+        queue = collections.deque([(root, 0)])
+
+        while queue:
+            node, col = queue.popleft()
+            columns[col].append(node.val)
+
+            if node.left:
+                queue.append((node.left, col - 1))
+            if node.right:
+                queue.append((node.right, col + 1))
+
+        return [columns[c] for c in sorted(columns)] 
