@@ -24,3 +24,28 @@ class Solution:
             res.append(level)
 
         return res
+
+
+        '''
+        DFS approach, go through it level order, same approach as DFS in 102, then go through res and reverse the odd levels
+        '''
+        res = []
+
+        def dfs(node, depth):
+            if not node:
+                return
+
+            if len(res) == depth:
+                res.append([])
+
+            res[depth].append(node.val)
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+
+        dfs(root, 0)
+
+        for i in range(len(res)):
+            if i % 2 != 0:
+                res[i].reverse()
+
+        return res
