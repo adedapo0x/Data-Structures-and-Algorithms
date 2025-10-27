@@ -60,3 +60,49 @@ class Solution:
 
 
         
+'''
+BFS approach, same logic
+'''
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        
+        ROWS, COLS = len(board), len(board[0])
+        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+        def bfsMutate():
+            queue = collections.deque()
+
+            for row in range(ROWS):
+                if board[row][0] == "O":
+                    queue.append((row, 0))
+                if board[row][COLS - 1] == "O":
+                    queue.append((row, COLS - 1))
+
+            for col in range(COLS):
+                if board[0][col] == "O":
+                    queue.append((0, col))
+                if board[ROWS - 1][col] == "O":
+                    queue.append((ROWS - 1, col))
+
+            while queue:
+                row, col = queue.popleft()
+                board[row][col] = "T"
+
+                for dr, dc in directions:
+                    neiR, neiC = row + dr, col + dc
+                    if neiR >= 0 and neiR < ROWS and neiC >= 0 and neiC < COLS and board[neiR][neiC] == "O":
+                        queue.append((neiR, neiC))
+
+        bfsMutate()
+        for row in range(ROWS):
+            for col in range(COLS):
+                if board[row][col] == "O":
+                    board[row][col] = "X"
+                elif board[row][col] == "T":
+                    board[row][col] = "O"
+
+            
