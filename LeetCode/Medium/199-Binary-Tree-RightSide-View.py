@@ -27,3 +27,30 @@ class Solution:
                     queue.append(node.right)
 
         return res
+
+
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        '''
+        dfs approach to solving this, similar to how we went about dfs approach of 102 and 103
+        we keep track of the depth as we go down the tree, once we come across the start of a new level, ie a new depth, then len of our
+        res would be equal to depth, since we start depth from 0, when res contains [5], ie one element, we would just want to explore the second level
+        (depth 1), and since we do our dfs call from node.right this time around, we always start a new level from the rightmost node in that level
+
+        TC: O(N), SC: O(N)
+        
+        '''
+        res = []
+
+        def dfs(node, depth):
+            if not node:
+                return
+
+            if len(res) == depth:
+                res.append(node.val)
+
+            dfs(node.right, depth + 1)
+            dfs(node.left, depth + 1)
+
+        dfs(root, 0)
+        return res
