@@ -6,7 +6,9 @@ class Solution:
         particular person
         we check for Rule 1 when we populate the parsed and mapping, a
         rule 2, is checked for each transaction, we loop through all other transactions made by the same person, this reduces the work we do rather than having to check
-        even with other people's own
+        even with other people's own. we add the index we are currently on at parsed to invalid and use a break once we see something that makes the transaction invalid, 
+        since we are checking for each transaction in parsed, is there anything that makes it invalid
+        we could technically also add both (where we are in parsed, and what made it invalid) since a set would filter out any duplicates, but it is cleaner this way.
 
         note that we should not use "continue" after invalidating a transaction cos of the amount is greater than 1000, if we use continue that means that transacttion would not in parsed and our ddictionary
         we do not want this, because that transaction can still be the cause why another transaction is invalidated through Rule 2
