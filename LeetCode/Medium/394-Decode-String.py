@@ -9,7 +9,7 @@ class Solution:
         is, add that to what we popped from stringStack and reassign it back to currentString, and in the end we return currentString, as it would have everything we want
 
         TC: O(maxK * n) where n is len of s , and maxK is the largest number k in s
-        because we iterate over s and we duplicate strings k times in the loop, so worst case is the largest number of K
+        because we iterate over s and we duplicate strings for every k[str] in the loop, so worst case is the largest number of K
         '''
         countStack = []
         stringStack = []
@@ -47,7 +47,8 @@ class Solution:
         because we go through the entire string, and for each decoding of a section, we are creating new string taking time relative to the length of the entire decoded string
         also the final .join call also takes O(M), so total is O(N + M)
         
-        SC: O(N + M), the stack may hold near about the entire input string, so O(N) and the output string that we generate is O(M)
+        SC: max(N, M), it , the stack may hold near about the entire input string, so O(N) and it can also hold output string that we generate is O(M)
+        it is not straight up O(M) because say we have 1[k]1[ee], the decoded string kee is shorter than the input string
         '''
         stack = []
 
