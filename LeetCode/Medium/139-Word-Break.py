@@ -75,7 +75,7 @@ class Solution:
         then we return to index 5, then iteration continues checking if bloomb or bloombe, then finally bloomber is valid
 
         for TC: because at every index we can choose whether to pick our segregation from ther or not, we end up having 2 choices of recursion per index
-        and this grows exponentially and hence not accurate, so TC is O(n.2^n), the extra n is cost of going over all the ends when start from a start
+        and this grows exponentially and hence not accurate, so TC is O(n.2^n), the extra n is cost of from the string slicing we do for every valid word
         and SC is O(N), recursion call stack + set
         '''
          
