@@ -20,22 +20,25 @@ class Solution:
         SC: O(1)
         
         '''
-        maxInt = 2 ** 31 - 1
-        minInt = -(2 ** 31)
+        original = x
+        ans = 0
+        maxInt = (2 ** 31) - 1
+        minInt = - (2 ** 31)
 
-        res = 0
-        while x != 0:
-            digit = int(fmod(x, 10))
-            x = int(x / 10)
+        while original != 0:
+            digit = int(math.fmod(original, 10))
+            original = int(original / 10)
 
-            if (res > maxInt // 10 or (res == maxInt // 10 and digit > maxInt % 10)):
+            if (ans > maxInt // 10) or (ans == maxInt // 10 and digit > maxInt % 10):
                 return 0
-            if (res < minInt // 10 or (res == minInt // 10 and digit < minInt % 10)):
+
+            if ans < int(minInt / 10) or (ans == int(minInt / 10) and digit < math.fmod(minInt ,10)):
                 return 0
 
-            res = (res * 10) + digit
+            ans = ans * 10 + digit
 
-        return res
+        return ans
+    
 
         # lesser lines of code still involves string conversion and reversing as below
         original = x
