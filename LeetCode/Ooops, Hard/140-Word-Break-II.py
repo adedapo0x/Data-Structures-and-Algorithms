@@ -1,6 +1,46 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         '''
+        Dp bottom up approach (tabulation) used here. we take a dp array of len(s) + 1, in order to hold for len(s). this array[i] stores the
+        sentences that can be created from the beginning of the string up until that index i. we set dp[0] to contain an empty string because that is 
+        the base case, 0 doesn't cover any string and is such assigned an empty string
+
+        so we go from 1 to len(s) using i, then our inner j checks from 0 up until i for valid sentences in our wordDict. so when we see a valid sentence from s[j:i],
+        we take all the prev valid sentences we have formed from dp[j] and add it to the word we found at s[j:i] then use it to populate dp[i], if there was no 
+        previous word there, say we are just starting out, say s[0:3] and what is in s[0] is "", we want to make sure we do not add any unnecessary space, that is why we have to check 
+        if there is a prevSentence, that determines if we just append to dp[i] or we have to add to prevSentence with space before appending
+
+        we then return dp[len(s)], this would contain an array of sentences that has been formed from the start of the string right up until we get to the end of s
+
+        TC: O(N^2 + T) where T is the cost of exploring all possible paths if every substring is valid , T can be O(2^n)
+        SC: O(n + T), O(N) because of set, and T because of the dp array holding all possible valid sentences
+        
+        '''
+
+
+
+
+        dp = [[] for _ in range(len(s) + 1)]
+        dp[0] = [""]
+        wordSet = set(wordDict)
+
+        for i in range(1, len(s) + 1):
+            for j in range(i):
+                word = s[j:i]
+                if word in wordSet:
+                    for prevSentence in dp[j]:
+                        if prevSentence:
+                            dp[i].append(prevSentence + " " + word)
+                        else:
+                            dp[i].append(word)
+        return dp[len(s)]
+
+
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        '''
         The memoization DP approach, here we use a memoization hashmap to store previously computed values for each index so we do not have to recompute them again
         the values here is, for each index, we get the sentences that could be segregated to the end from that index, and we store it in the hashmap
         so i : ["abc de", "abc d e"], so that way if we come across the index again no need to do recursive calls for it again
