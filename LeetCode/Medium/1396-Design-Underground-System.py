@@ -6,6 +6,8 @@ class UndergroundSystem:
     to get average time is just computing average for the a particular start - stop station using the second dict
 
     TC: O(1)
+    SC: O(P + R) where P is the number of passengers in our system at the same time, and R is the number of distinct routes, say a-b, b-a, a-c etc
+    the checkInDict comes at a cost of O(P) while for checkIn-checkOut we have O(R)
     """
 
     def __init__(self):
