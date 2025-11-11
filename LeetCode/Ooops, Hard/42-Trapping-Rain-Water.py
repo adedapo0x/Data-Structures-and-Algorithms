@@ -10,6 +10,30 @@ class Solution:
         TC: O(N), SC: O(1)
         '''
 
+        # in this implementation, whichever side is smaller, is where we use to get height for that index
+        # we have to be careful since if maxL is smaller than maxR, doesn't automatically mean it is taller than height[l] which is the current we are at
+        # so we have to avoid negatives. similar with when maxR is smaller, doesn't automatically mean it is taller than height[r]
+        maxL = maxR = 0
+        l, r = 0, len(height) - 1
+        res = 0
+
+        while l <= r:
+            if maxL <= maxR:
+                diff = maxL - height[l]
+                res += (diff if diff > 0 else 0)
+                maxL = max(maxL, height[l])
+                l += 1 
+            else:
+                diff = maxR - height[r]
+                res += (diff if diff > 0 else 0)
+                maxR = max(maxR, height[r])
+                r -= 1
+
+        return res
+
+
+        # still same approach as one above, but less straightforward to me I suppose
+
         n = len(height)
         l, r = 0, n - 1
         maxLeft = height[0]
