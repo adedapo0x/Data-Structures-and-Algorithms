@@ -31,6 +31,11 @@ class Solution:
         longest by the right of each index. Note that first element would have a prefix of 0 and last element a suffix of 0. So if we have that, we take the minimum of both for each index,
         minimum because if we take the one that is greater, the water overspills. So for each index, we are checking the min(longestPrefix, longestSuffix) - height[i] 
         ie minus the length of that block to get how many blocks of water each block can retain above it
+        note how we create the maxRight array, since we are appending to maxRight, even if our loop to create the maxRight is going from right to left, our
+        maxRight is being created in a reversed order from left to right cos of append, so we have to start our iteration from maxRight from behind
+
+        woulda been better to just have prefixed the size like maxRight = [0] * n , but this is another unnecessary O(N) op.
+        
         Then we have to check that the difference we get is not less than zero (ie min height we have is not smaller than the length of the current index that we are in) if it is, we give it zero
         because negative values would mess up our count
         then add up the total of the array we used to store the water being stored
