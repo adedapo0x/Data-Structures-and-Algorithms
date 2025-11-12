@@ -28,5 +28,47 @@ class Solution:
             return up + left
 
         return countUnique(m - 1, n - 1)
+    
+
+        # still exactly same memoization approach, only now I am going as the question described from (0,0) to target not in reverse order
+        # still same TC and SC
+        dp = [[-1] * n for _ in range(m)]
+        def countUnique(r, c):
+            if r == m - 1 and c == n - 1:
+                return 1
+            if r >= m or c >= n:
+                return 0
+
+            if dp[r][c] != -1:
+                return dp[r][c]
+
+            right = countUnique(r, c + 1)
+            down = countUnique(r + 1, c)
+
+            dp[r][c] = right + down
+            return right + down
+
+        return countUnique(0, 0)
+
+    
+
+    '''
+    Bruteforce approach, at every position, we go both up and left, we do it in reverse of how the question stated it since we are moving from the target to start
+    and not from start to target as the question described
+    '''
+    def uniquePaths(self, m: int, n: int) -> int:
+        
+        def countUnique(m, n):
+            if m == 0 and n == 0:
+                return 1
+            if m < 0 or n < 0:
+                return 0
+
+            up = countUnique(m - 1, n)
+            left = countUnique(m, n - 1)
+
+            return up + left
+
+        return countUnique(m - 1, n - 1)
 
         
