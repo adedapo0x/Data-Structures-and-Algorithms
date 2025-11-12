@@ -1,6 +1,28 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         '''
+        This is the tabulation method of doing this. we intialize our 2D DP grid used to store results of previously overlapping subproblem with 1
+        because there is only one way to go from one place to that same place. 
+
+        we start our iteration of the cols and rows from 1 up until m and n because the positions at row 0 and col 0 do not have any previous position for 
+        someone to come from. so in order not to get index errors or have to explicitly check if in range, we start row and col from 1
+
+        so for each row and col we want to find how many ways to get there, in order to get that, we need to find how many ways to get to what is on top of it
+        and what is by the left of it so we can sum them up, since the question states that the only way to go to a position is to go down or right
+
+        we then return dp[m-1][n-1] as this would contain the number of ways to get there built from the sum of the previous positions
+
+        TC: O(M*N), SC: O(M *N) we get rid of the recursive stack space here
+        '''
+
+        dp = [[1] * n for _ in range(m)]
+
+        for r in range(1, m):
+            for c in range(1, n):
+                dp[r][c] = dp[r-1][c] + dp[r][c-1]
+
+        return dp[m - 1][n - 1]
+        '''
         dp memoization approach, where we store any overlapping problem
         we start the dp from the target, all the way up to the start of the grid, when one of the recursions get to the start, we return 1, 
         as that is a unique path, we have another check to keep the search space within the grid, once either the row index or the col index is
