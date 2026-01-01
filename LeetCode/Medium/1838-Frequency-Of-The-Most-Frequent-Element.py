@@ -17,7 +17,7 @@ class Solution:
         TC: O(NlogN) the NlogN comes from the sorting, the loop is O(N) because the while loop cannot grow to be O(N) 
         SC: O(N), primarily due to the sorting.
         
-
+        There is a very similar implementation to this below 
         '''
         sortedNums = sorted(nums)
 
@@ -36,3 +36,29 @@ class Solution:
             size = max(size, right - left + 1)
 
         return size
+    
+
+        '''
+        basically the same thing with the implementation above but only difference is we do not really need the inner while loop, its job was
+        previously to shrink the window once it became invalid by 1, we notice that it is never going to become invalid by more than 1 element, 
+        so that way if the window becomes invalid, we get rid of leftmost, and try to see how many similar elements we can get for the new target, which broadens our window
+
+        the right always increments by 1 due to the for loop, and if the left also has reason to move, it is also by 1
+
+        same TC and SC
+        '''
+
+        nums.sort()
+
+        currentTt = 0
+        left = right = 0
+
+        for right in range(len(nums)):
+            target = nums[right]
+            currentTt += target
+
+            if (right - left + 1) * target - currentTt > k:
+                currentTt -= nums[left]
+                left += 1
+
+        return right - left + 1
