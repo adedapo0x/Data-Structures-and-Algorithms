@@ -21,10 +21,11 @@ class Solution:
         # less optimal solution
         # checks for every valid rotation starting from 1 to see if the there is any in which the formular works for 
         sortedArr = sorted(nums)
-        for i in range(1, len(nums)+1):
+
+        for x in range(1, len(nums) + 1):
             count = len(nums)
-            for j in range(len(nums)):
-                if not (sortedArr[j] == nums[(j+i) % len(nums)]):
+            for i in range(len(nums)):
+                if not(nums[i] == sortedArr[(i + x) % len(sortedArr)]):
                     break
                 else:
                     count -= 1
