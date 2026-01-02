@@ -48,6 +48,17 @@ class Solution:
         else:
             return sLargest
         
+        # cleaner way of writing this same 2 pass approach is:
+        second = -1
+        first = max(arr)
+        
+        for num in arr:
+            if num > second and num < first:
+                second = num
+                
+        return second
+        
+        
     
 # Optimal solution
 # Solution above is O(N) but takes two passes, there is better solution with just one pass
@@ -55,7 +66,10 @@ class Solution:
 
 class Solution:
     def getSecondLargest(self, arr):
+        
+        # we could have also just initially set both to -1, so there would be no need for the check after the loop, we can just return direct
         largest = sLargest = 0
+
         
         for n in arr:
             if n > largest:
