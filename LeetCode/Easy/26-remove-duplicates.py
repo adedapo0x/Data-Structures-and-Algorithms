@@ -1,6 +1,19 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
 
+        # more straightforward I suppose ( solution while revising )
+        l = 0
+
+        for r in range(1, len(nums)):
+            if nums[r] != nums[l]:
+                l += 1
+                nums[l] = nums[r]
+
+        return l + 1
+
+
+
+
         # optimal solution, shorter more direct code
         # in this case loops never runs if the length of nums is 1
         # TC: O(N), SC:O(1)
