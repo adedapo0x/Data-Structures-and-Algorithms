@@ -21,6 +21,19 @@ class Solution:
         reverse(0, k-1)
         reverse(k, n-1)
 
+        # the logic here is to use a general formular for right rotation indexes, it is
+        # if an array A is right rotated to produce array B, both with length n, then 
+        # B[i] = A[(i - k + n) % n]
+        # Uses extra memory here to copy the original array before we start mutating it
+        # TC: O(N), SC: O(N)
+        k = k % len(nums)
+
+        copy = nums[:]
+        n = len(copy)
+
+        for i in range(len(copy)):
+            nums[i] = copy[(i - k + n) % n]
+
 
 
         # Uses extra memory to store the initial n - k elements, then we put the remaining k elements at the end of the array to the beginning of the array
