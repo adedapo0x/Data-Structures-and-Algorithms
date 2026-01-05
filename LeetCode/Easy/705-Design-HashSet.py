@@ -2,6 +2,7 @@ class MyHashSet:
 
     def __init__(self):
         self.myHash = set()
+        # could have also used an array here instead
         
     def add(self, key: int) -> None:
         self.myHash.add(key)
