@@ -29,6 +29,29 @@ class Solution:
                 if len(result) == k:
                     return result
 
+        '''
+        Here, we use a heap, I feel this is a more intuitive solution, similar to what is implemented above but a bit better since we use a heap
+        we get the frequencies of the elements in a hashmap, then we insert it as a pair into the maxheap, taking (freq, number), so when we are asked to get top K 
+        frequent element, all we need to do is to pop from the heap k times
+
+        TC: O(NlogN) from creating the heap, SC: O(N)
+        '''
+
+        mapper = Counter(nums)
+        heap = []
+
+        for num, freq in mapper.items():
+            heapq.heappush(heap, [-freq, num])
+
+        res = []
+        for _ in range(k):
+            freq, num = heapq.heappop(heap)
+            res.append(num)
+
+        return res
+        
+
+
 
         '''
         less optimal solution
