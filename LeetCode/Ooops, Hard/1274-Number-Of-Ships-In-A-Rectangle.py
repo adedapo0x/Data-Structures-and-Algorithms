@@ -66,6 +66,8 @@ class Solution:
 
         # check if the rectangle coordinates are valid before calling hasShips. they may get invalid as we go down the recursion
         # x1 should always be <= x2 as it is either below it or same as it, same for y1 to y2
+        # this can happen if we have x1 and x2 as the same value, and we do integer division, then midX will be equal to x1 and x2, so when we call bottomRight, we do midX + 1, which is now greater than x2
+        # or similar thing fr y1 == y2, then midY will be equal to y1 and y2, so when we call topLeft, we do midY + 1, which is now greater than y2
         if x1 > x2 or y1 > y2:
             return 0
 
