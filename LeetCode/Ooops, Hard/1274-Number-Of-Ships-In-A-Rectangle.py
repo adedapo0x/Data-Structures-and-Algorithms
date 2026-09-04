@@ -14,7 +14,12 @@ a ship here, if there is not, we return 0, and no need to explore further for th
 now, to split, we take each quadrant and we note how it is formed, use graph below as reference, say we start from bottomLeft, we start from x1 up until xMid,
 then for its y axis, we start from y1 up until midY, note that we do not want overlaps that causes repeating a position, so topLeft, on x axis starts from x1 to xMid
 and for y axis, yMid + 1 to y2, the +1 is important, we do not want it to overlap with yMid, bottomLeft is already covering that. we do that for all the quadrants,
-a breakdown is given below. then for all the x and y ranges for each quadrant we build our own bottomLeft and topRight from it in order to recursively call
+a breakdown is given below. then for all the x and y ranges for each quadrant we build our own bottomLeft and topRight from it in order to recursively calllog
+
+so TC for this approach is O(K * log(max(W, H))), where W and H is width and height of the rectangle, K is the number of ships, since we are only going to explore quadrants that have ships in them
+we say max of W and H because as we divide the rectangle, one of them will finish first, but we keep dividing the other (recursion continues) till we get to a single point
+SC is O(log(max(W, H))) for the recursion stack
+
 '''
 
 
