@@ -16,3 +16,6 @@ def split_array(arr):
         if leftTotal == targetNum:
             return [arr[:i+1], arr[i+1:]]
     raise ValueError("Array cannot be correctly split")
+
+
+# come back to implemntation of the split not necessarily being contiguous.
