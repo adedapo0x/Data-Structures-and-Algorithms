@@ -33,3 +33,30 @@ class Solution:
 
         traverse(root, [])
         return res
+    
+
+
+
+        '''
+        approach uses iterative method of iterating through the tree with a stack to store paths, we do not use recursion here
+        stack stores (node, and path up until that node), so when we see a node with no children, we can then add to our results list which is path
+        TC: O(N * h) , where N is number of nodes and H is the height of the tree, h comes from the cost of creating a new string if the node is at depth h
+        and SC: O(h) stack
+        '''
+        paths = []
+        stack = [(root, str(root.val))]
+
+        while stack:
+            node, path = stack.pop()
+
+            if not node.left and not node.right:
+                paths.append(path)
+                continue
+
+            if node.left:
+                stack.append((node.left, path + "->" + str(node.left.val)))
+            if node.right:
+                stack.append((node.right, path + "->" + str(node.right.val)))
+
+        return paths
+
