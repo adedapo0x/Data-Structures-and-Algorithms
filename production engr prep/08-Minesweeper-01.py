@@ -2,6 +2,10 @@
 Problem: You are given a m*n grid. You are asked to generate k mines on this grid randomly.
 Each cell should have equal probability of k / m*n of being chosen.
 
+
+There is a more complex question about minesweepers that is an LC question
+revise that also - Leetcode 529
+
 '''
 
 '''
