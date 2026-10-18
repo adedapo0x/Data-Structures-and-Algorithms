@@ -25,9 +25,9 @@ class Solution:
 
             if not node.left and not node.right:
                 res.append('->'.join(temp))
- 
-            traverse(node.left, temp)
-            traverse(node.right, temp)
+            else:
+                traverse(node.left, temp)
+                traverse(node.right, temp)
 
             temp.pop()
 
