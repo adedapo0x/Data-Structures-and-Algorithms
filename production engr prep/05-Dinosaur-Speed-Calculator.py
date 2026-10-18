@@ -28,21 +28,27 @@ Velociraptorr,2.62,bipedal
 
 import csv
 import math
+from sys import argv, exit
+
 
 def parse_csv_to_dict(filepath, key_field):
-    data = {}
-    with open(filepath, "r") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            data[row[key_field]] = row
-    return data
-
+    result = {}
+    try:
+        with open("filename", "r") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                result[row[key_field]] = row
+    except OSError as e:
+        raise OSError(f"Could not open {filepath}: {e}") from e
+    except KeyError:
+        raise KeyError(f"Could not find {key_field} in {filepath}")
+        
 def calculate_speed(stride_length, leg_length):
-    speed = ((stride_length / leg_length) - 1 * math.sqrt(leg_length * 9.8))
+    speed = ((stride_length / leg_length) - 1) * math.sqrt(leg_length * 9.8)
     return speed
     
     
-def main(filepath_1, filepath_2):
+def print_bipedal_dinosaurs_by_speed(filepath_1, filepath_2):
     filepath_dict_1 = parse_csv_to_dict(filepath_1, "NAME")
     filepath_dict_2 = parse_csv_to_dict(filepath_2, "NAME")
     dinosaurs = []
@@ -50,7 +56,7 @@ def main(filepath_1, filepath_2):
     for name, filepath_2_info in filepath_dict_2.items():
         if name in filepath_dict_1:
             stance = filepath_2_info["STANCE"].strip().lower()
-            if stance != bipedal:
+            if stance != "bipedal":
                 continue
             stride_length = float(filepath_2_info["STRIDE_LENGTH"])
             leg_length = float(filepath_dict_1[name]["LEG_LENGTH"])
@@ -61,3 +67,12 @@ def main(filepath_1, filepath_2):
     
     for name, _ in dinosaurs:
         print(name)
+
+
+if __name__ == "__main__":
+    cmd_arguements = argv
+    if len(cmd_arguements) != 3:
+        print(f"Usage: {argv[0]} <dataset1.csv> <dataset2.csv>")
+        exit(1)
+    file1, file2 = cmd_arguements[1:]
+    print_bipedal_dinosaurs_by_speed(file1, file2)

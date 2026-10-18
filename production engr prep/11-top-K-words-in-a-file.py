@@ -38,7 +38,7 @@ def find_top_k_freq_words(filepath, k):
     try:
         with open(filepath, "r") as file:
             for line in file:
-                words = RE_WORD.findall(line.lower())
+                words = WORD_RE.findall(line.strip().lower())
                 word_count.update(words)
     except OSError as e:
         raise OSError(f"Could not read {filepath}: {e}") from e
