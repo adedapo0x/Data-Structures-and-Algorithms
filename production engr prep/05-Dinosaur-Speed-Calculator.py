@@ -34,7 +34,7 @@ from sys import argv, exit
 def parse_csv_to_dict(filepath, key_field):
     result = {}
     try:
-        with open("filename", "r") as file:
+        with open(filepath, "r") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 result[row[key_field]] = row
@@ -42,6 +42,7 @@ def parse_csv_to_dict(filepath, key_field):
         raise OSError(f"Could not open {filepath}: {e}") from e
     except KeyError:
         raise KeyError(f"Could not find {key_field} in {filepath}")
+    return result
         
 def calculate_speed(stride_length, leg_length):
     speed = ((stride_length / leg_length) - 1) * math.sqrt(leg_length * 9.8)

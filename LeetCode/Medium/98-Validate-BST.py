@@ -26,6 +26,22 @@ class Solution:
             validateTree(node.right, node.val, right))
         
         return validateTree(root, float("-inf"), float("inf"))
+
+        # iterative approach while still using this left and right boundary approach
+
+        stack = [(root, float("-inf"), float("inf"))]
+
+        while stack:
+            node, left, right = stack.pop()
+            if not (left < node.val < right):
+                return False
+
+            if node.left:
+                stack.append((node.left, left, node.val))
+            if node.right:
+                stack.append((node.right, node.val, right))
+
+        return True
     
 
         # we could do something very similar to approach above using BFS, same TC and SC
