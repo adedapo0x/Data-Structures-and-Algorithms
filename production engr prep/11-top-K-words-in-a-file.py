@@ -27,16 +27,24 @@ def find_top_k_freq_words(filepath, k):
     approach using the heap
     nlargest here is a function that returns the k largest elements from the iterable, in this case, the counts.items() which is a list of tuples (word, count)
 
+    for the error handling part: we use OSError as that covers every OS related problem such as I/o failure, missing files or permission issues
+    opening a file is an OS work, open() is a syscall, so we cover for any of that and catch the error and raise it neatly
+    the from at the end is to chain the error to the one we are raising so when debugging we can tell that the custom error we raised is due to e
+
     TC: O(N + MlogK) where N is the number of words in the file and M is the number of unique words and K is the number of top frequent words we want to find.
     SC: O(N + k)
     '''
-    word_counts = Counter()
-    with open(filepath, "r") as file:
-        for line in file:
-            word_counts.update(WORD_RE.findall(line.lower()))
-    top_k_words = heapq.nlargest(k, word_counts.items(), key=lambda pair: pair[1])
-    for word, freq in top_k_words:
-        print(word)
+    word_count = Counter()
+    try:
+        with open(filepath, "r") as file:
+            for line in file:
+                words = RE_WORD.findall(line.lower())
+                word_count.update(words)
+    except OSError as e:
+        raise OSError(f"Could not read {filepath}: {e}") from e
+        
+    top_k_words = heapq.nlargest(k, word_count.items(), key=lambda pair: pair[1])
+    return top_k_words
         
 
     # this is building the heap manually, if we do not want to use the nlargest function
