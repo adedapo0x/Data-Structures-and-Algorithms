@@ -15,6 +15,11 @@ Battleships can only be placed horizontally or vertically. In other words, they 
 At least one horizontal or vertical cell separates between two battleships - there are no adjacent battleships
 
 output should be [(0,0)] [(0,3), (1,3), (2,3)} representing 2 ships on the board
+
+
+a follow up could be: 
+to implement  is_valid_board: every ship must be a straight line, and ships may not touch each other (including diagonally)
+
 '''
 
 def find_ships(board):
@@ -43,3 +48,32 @@ def find_ships(board):
                         tempR += 1
                     positions.append(cells)
     return positions
+
+
+'''
+for the follow up of is valid board
+the approach here is to make sure that for every X we come across, that none of its diagonal is also a X,
+for example, if we have 
+
+[["X","X",".","X"],
+ [".","X",".","X"],
+ [".",".",".","X"]]
+
+we see that (0, 0) has an X on its diagonal at (1, 1), which violates the rule that they have to be entirely be in a single col or row
+'''
+def is_valid_board(board):
+    # TC: O(M * N) where M and N is row and cols of board respectively.
+    #  SC: O(1) no extra space used, directions is constant space (it never exceeds a length of 4)
+    directions = [(-1, 1), (1, 1), (1, -1), (-1, -1)]
+    ROWS, COLS = len(board), len(board[0])
+    
+    for row in range(ROWS):
+        for col in range(COLS):
+            if board[row][col] == "X":
+                for dr, dc in directions:
+                    neighbour_R, neighbour_C = row + dr, col + dc
+                    if (0 <= neighbour_R < ROWS and 0 <= neighbour_C < COLS
+                        and board[neighbour_R][neighbour_C] == "X"):
+                        return False
+                    
+    return True
