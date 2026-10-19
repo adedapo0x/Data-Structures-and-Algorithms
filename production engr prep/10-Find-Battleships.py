@@ -70,7 +70,7 @@ def is_valid_board(board):
     for row in range(ROWS):
         for col in range(COLS):
             if board[row][col] == "X":
-                for dr, dc in directions:
+                for dr, dc in    directions:
                     neighbour_R, neighbour_C = row + dr, col + dc
                     if (0 <= neighbour_R < ROWS and 0 <= neighbour_C < COLS
                         and board[neighbour_R][neighbour_C] == "X"):
