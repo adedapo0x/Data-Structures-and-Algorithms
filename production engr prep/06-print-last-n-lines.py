@@ -20,8 +20,8 @@ def print_last_n_line(filepath, n):
         for line in file:
             last_lines.append(line)
             
-        for line in last_lines:
-            print(line)
+    for line in last_lines:
+        print(line)
 
 
 try:

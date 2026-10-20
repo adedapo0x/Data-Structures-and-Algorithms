@@ -19,7 +19,7 @@ class Solution:
         if l == r:
             return lists[l]
 
-        mid = l + (r - l) // 2
+        mid = l + (r - l) // 2 # to prevent overflow, not really necessary in python sha
         left = self.divide(lists, l, mid)
         right = self.divide(lists, mid + 1, r)
         return self.conquer(lists, left, right) 

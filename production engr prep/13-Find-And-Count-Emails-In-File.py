@@ -5,7 +5,7 @@ find and count the number of emails in a file.
 import re
 from collections import Counter
 
-EMAIL_RE = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[ga-zA-Z]{2,}"
+EMAIL_RE = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
 
 def find_emails(filepath):
     # TC: O(N) where N is the number of lines in the file
